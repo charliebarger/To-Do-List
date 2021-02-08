@@ -4,8 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./styles/normalize.css">
+    <link rel="stylesheet" href="./styles/styles.css">
 </head>
 <body>
+    <header>
+        <div class="toggle-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1>To Do List</h1>
+    </header>
+    <section>
+        <nav id="sidebar">
+            <div class="task-subheader">
+                <div class="image-wrapper">
+                    <img src="./img/Noun_Project_projects_icon_1327109_cc.svg" alt="Folder Icon">
+                </div>
+                <h2>My Tasks</h2>
+            </div>
+            <ul class="tasks">
+                <li>Default</li>
+                <li>Clean Room</li>
+                <li>Code</li>
+                <li>Work</li>
+            </ul>
+            <div id="new-task-wrapper">
+                <input type="text" name="" id="new-task">
+            </div>
+            <div class="buttonWrapper">
+                <button>Delete</button>
+            </div>
+        </nav>
+    </section>
     
 </body>
 <script src="main.js"></script>
