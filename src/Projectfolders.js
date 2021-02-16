@@ -1,4 +1,4 @@
-export function addProjectFolderEvents(nodeList){
+function addProjectFolderEvents(nodeList){
     nodeList.forEach(node => {
         addClickListners(nodeList, node)
         addHoverEffect(node, 'hover-x', node.lastElementChild)
@@ -44,4 +44,11 @@ function addClasses(item, CSSclass){
     item.classList.add(CSSclass)
 }
 
+function updateFolders() {
+    let projectFolders = document.querySelectorAll('.project-folder');
+    addProjectFolderEvents(projectFolders)
+}
 
+
+
+export {updateFolders, loopItems, addClasses}
