@@ -1,12 +1,17 @@
 /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./src/burgerMenu.js":
 /*!***************************!*\
   !*** ./src/burgerMenu.js ***!
   \***************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "addMenuEvent": () => (/* binding */ addMenuEvent)
+/* harmony export */ });
 let burger = document.querySelector('.hamburger');
 let navBar = document.querySelector('nav');
 
@@ -17,9 +22,11 @@ function toggleClassOnEvent(eventKey ,className, item = eventKey){
 }
 
 function addMenuEvent(){
-    toggleClassOnEvent(burger, 'active')
-    toggleClassOnEvent(burger, navBar, 'closed')
+    toggleClassOnEvent(burger, 'closed')
+    toggleClassOnEvent(burger, 'active', navBar)
 }
+
+
 
 /***/ }),
 
@@ -29,40 +36,73 @@ function addMenuEvent(){
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _burgerMenu__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./burgerMenu */ "./src/burgerMenu.js");
-/* harmony import */ var _burgerMenu__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_burgerMenu__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _projectFolderstyling__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./projectFolderstyling */ "./src/projectFolderstyling.js");
+
 
 //burger icon//
 (0,_burgerMenu__WEBPACK_IMPORTED_MODULE_0__.addMenuEvent)()
-
 //hover and click project//
 
 let projectFolders = document.querySelectorAll('.project-folder')
 
-projectFolders.forEach(folder => {
-  folder.addEventListener('click', () => {
-    projectFolders.forEach(folder => {
-      if(folder.classList.contains('selected-project')){
-        folder.classList.remove('selected-project');
-        folder.lastElementChild.classList.remove('show-x')
-      }
-    })
-    folder.classList.add('selected-project')
-    folder.lastElementChild.classList.add('show-x')
-  })
-  folder.addEventListener('mouseover', () => {
-    folder.lastElementChild.classList.add('hover-x')
-  })
-  folder.addEventListener('mouseleave', () => {
-    folder.lastElementChild.classList.remove('hover-x')
-  })
-})
-
-//add new project//
+;(0,_projectFolderstyling__WEBPACK_IMPORTED_MODULE_1__.addListners)(projectFolders)
 
 
+
+
+/***/ }),
+
+/***/ "./src/projectFolderstyling.js":
+/*!*************************************!*\
+  !*** ./src/projectFolderstyling.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "addListners": () => (/* binding */ addListners)
+/* harmony export */ });
+function addListners(nodeList){
+    nodeList.forEach(node => {
+        removeClassFromNodeList(nodeList, 'selected-project','show-x' )
+        addMouseEvent('click', node.lastElementChild, 'show-x')
+        addMouseEvent('click', node, 'selected-project')
+        addMouseEvent('mouseover', node.lastElementChild, 'hover-x', addClass)
+        addMouseEvent('mouseleave', node.lastElementChild, 'hover-x', removeClass)
+  })
+}
+
+function addClickListnerEvent(node, cssClass1, cssClass2){
+  node.addEventListener('click', () => {
+      removeClassFromNodeList(node, cssClass1, cssClass2)
+      addClass(node, cssClass1)
+      addClass(node.lastElementChild, cssClass2)
+  })
+}
+
+function addMouseEvent(eventType, node, cssClass, action){
+  node.addEventListener(eventType, () => {
+    action(node, cssClass)
+  })
+}
+
+function removeClass(item, cssClass2){
+  item.classList.remove(cssClass2)
+}
+
+function addClass(item, cssClass){
+  item.classList.add(cssClass)
+}
+
+function removeClassFromNodeList(nodeList, cssClass1, cssClass2){
+  nodeList.forEach(node => {
+      node.addEventListener('click', () => {
+        if(node.classList.contains(cssClass1)){
+        removeClass(node, cssClass1)
+        removeClass(node.lastElementChild, cssClass2)
+        }})})}
 
 /***/ })
 
@@ -92,18 +132,6 @@ projectFolders.forEach(folder => {
 /******/ 	}
 /******/ 	
 /************************************************************************/
-/******/ 	/* webpack/runtime/compat get default export */
-/******/ 	(() => {
-/******/ 		// getDefaultExport function for compatibility with non-harmony modules
-/******/ 		__webpack_require__.n = (module) => {
-/******/ 			var getter = module && module.__esModule ?
-/******/ 				() => (module['default']) :
-/******/ 				() => (module);
-/******/ 			__webpack_require__.d(getter, { a: getter });
-/******/ 			return getter;
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
