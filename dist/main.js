@@ -2,6 +2,75 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/Projectfolders.js":
+/*!*******************************!*\
+  !*** ./src/Projectfolders.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "updateFolders": () => (/* binding */ updateFolders),
+/* harmony export */   "loopItems": () => (/* binding */ loopItems),
+/* harmony export */   "addClasses": () => (/* binding */ addClasses)
+/* harmony export */ });
+function addProjectFolderEvents(nodeList){
+    nodeList.forEach(node => {
+        addClickListners(nodeList, node)
+        addHoverEffect(node, 'hover-x', node.lastElementChild)
+    })
+}
+
+//call functions on click
+function addClickListners(nodeList, item){
+    item.addEventListener('click', () => {
+    loopItems(nodeList)
+    addClasses(item,'selected-project')
+    addClasses(item.lastElementChild, 'show-x')
+  })
+}
+
+//loop through items and call removeClasses on each
+function loopItems(nodeList){
+    nodeList.forEach(node => {
+        removeClasses(node.lastElementChild, 'show-x' )
+        removeClasses(node, 'selected-project')
+    })
+}
+
+//uses mouseover and mouseleave to create a hover effect. The mouseover can be on one element and effect another
+function addHoverEffect(itemHovered, CSSclass, itemWitheffect = itemHovered){
+   itemHovered.addEventListener('mouseover', () => {
+       itemWitheffect.classList.add(CSSclass)
+   })
+   itemHovered.addEventListener('mouseleave', () => {
+    itemWitheffect.classList.remove('hover-x')
+  })
+}
+
+//if an item contains a class remove that class
+function removeClasses(item, CSSclass){
+    if (item.classList.contains(CSSclass)){
+        item.classList.remove(CSSclass)
+    }
+}
+
+//adds css classes
+function addClasses(item, CSSclass){
+    item.classList.add(CSSclass)
+}
+
+function updateFolders() {
+    let projectFolders = document.querySelectorAll('.project-folder');
+    addProjectFolderEvents(projectFolders)
+}
+
+
+
+
+
+/***/ }),
+
 /***/ "./src/burgerMenu.js":
 /*!***************************!*\
   !*** ./src/burgerMenu.js ***!
@@ -30,6 +99,53 @@ function addMenuEvent(){
 
 /***/ }),
 
+/***/ "./src/createNewProject.js":
+/*!*********************************!*\
+  !*** ./src/createNewProject.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "newProject": () => (/* binding */ newProject)
+/* harmony export */ });
+class newProject{
+    constructor(title){
+        this.title = title
+    }
+
+    createWrapper() {
+        let parent = document.querySelector('.project-list')
+        let wrapper = document.createElement('div');
+        wrapper.classList.add("list-wrapper", "project-folder", "hover-project", "selected-project")
+        parent.appendChild(wrapper)
+        return wrapper
+    }
+
+    createTitle(){
+        let content = document.createElement('li')
+        content.textContent = this.title
+        return content
+    }
+
+    createDelete(){
+        let deleteButton = document.createElement('div');
+        deleteButton.classList.add("delete-icon")
+        return deleteButton
+    }
+
+    createNewProject(){
+        let wrapper = this.createWrapper()
+        wrapper.append(this.createTitle(), this.createDelete() )
+        
+    }
+}
+
+
+
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -38,71 +154,30 @@ function addMenuEvent(){
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _burgerMenu__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./burgerMenu */ "./src/burgerMenu.js");
-/* harmony import */ var _projectFolderstyling__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./projectFolderstyling */ "./src/projectFolderstyling.js");
+/* harmony import */ var _Projectfolders__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Projectfolders */ "./src/Projectfolders.js");
+/* harmony import */ var _createNewProject__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./createNewProject */ "./src/createNewProject.js");
+
 
 
 //burger icon//
 (0,_burgerMenu__WEBPACK_IMPORTED_MODULE_0__.addMenuEvent)()
 //hover and click project//
-
-let projectFolders = document.querySelectorAll('.project-folder')
-
-;(0,_projectFolderstyling__WEBPACK_IMPORTED_MODULE_1__.addListners)(projectFolders)
+;(0,_Projectfolders__WEBPACK_IMPORTED_MODULE_1__.updateFolders)()
 
 
+let project = document.getElementById('add-project')
+project.addEventListener('keydown', function(e){
+    if(e.key == 'Enter'){
+        let projectFolders = document.querySelectorAll('.project-folder');
+        let folderProject = new _createNewProject__WEBPACK_IMPORTED_MODULE_2__.newProject(project.value)
+        folderProject.createNewProject()
+        ;(0,_Projectfolders__WEBPACK_IMPORTED_MODULE_1__.updateFolders)()
+        project.value = ''
+        ;(0,_Projectfolders__WEBPACK_IMPORTED_MODULE_1__.loopItems)(projectFolders)
+    }
+})
 
 
-/***/ }),
-
-/***/ "./src/projectFolderstyling.js":
-/*!*************************************!*\
-  !*** ./src/projectFolderstyling.js ***!
-  \*************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "addListners": () => (/* binding */ addListners)
-/* harmony export */ });
-function addListners(nodeList){
-    nodeList.forEach(node => {
-        removeClassFromNodeList(nodeList, 'selected-project','show-x' )
-        addMouseEvent('click', node.lastElementChild, 'show-x')
-        addMouseEvent('click', node, 'selected-project')
-        addMouseEvent('mouseover', node.lastElementChild, 'hover-x', addClass)
-        addMouseEvent('mouseleave', node.lastElementChild, 'hover-x', removeClass)
-  })
-}
-
-function addClickListnerEvent(node, cssClass1, cssClass2){
-  node.addEventListener('click', () => {
-      removeClassFromNodeList(node, cssClass1, cssClass2)
-      addClass(node, cssClass1)
-      addClass(node.lastElementChild, cssClass2)
-  })
-}
-
-function addMouseEvent(eventType, node, cssClass, action){
-  node.addEventListener(eventType, () => {
-    action(node, cssClass)
-  })
-}
-
-function removeClass(item, cssClass2){
-  item.classList.remove(cssClass2)
-}
-
-function addClass(item, cssClass){
-  item.classList.add(cssClass)
-}
-
-function removeClassFromNodeList(nodeList, cssClass1, cssClass2){
-  nodeList.forEach(node => {
-      node.addEventListener('click', () => {
-        if(node.classList.contains(cssClass1)){
-        removeClass(node, cssClass1)
-        removeClass(node.lastElementChild, cssClass2)
-        }})})}
 
 /***/ })
 
