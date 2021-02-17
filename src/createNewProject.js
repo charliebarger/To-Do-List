@@ -19,7 +19,7 @@ export class newProject{
 
     createDelete(){
         let deleteButton = document.createElement('div');
-        deleteButton.classList.add("delete-icon")
+        deleteButton.classList.add("delete-icon", "show-x")
         return deleteButton
     }
 
