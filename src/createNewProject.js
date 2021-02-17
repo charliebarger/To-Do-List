@@ -1,4 +1,4 @@
-export class newProject{
+class newProject{
     constructor(title){
         this.title = title
     }
@@ -30,4 +30,7 @@ export class newProject{
     }
 }
 
-
+export function createNewFolder(title) {
+    let folderProject = new newProject(title)
+    folderProject.createNewProject()
+}

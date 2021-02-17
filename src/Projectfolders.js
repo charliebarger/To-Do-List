@@ -16,6 +16,7 @@ function addClickListners(nodeList, item){
 
 //loop through items and call removeClasses on each
 function loopItems(nodeList){
+    console.log(nodeList)
     nodeList.forEach(node => {
         removeClasses(node.lastElementChild, 'show-x' )
         removeClasses(node, 'selected-project')
@@ -45,10 +46,16 @@ function addClasses(item, CSSclass){
 }
 
 function updateFolders() {
-    let projectFolders = document.querySelectorAll('.project-folder');
+    let projectFolders = updateProjectFoldersList()
     addProjectFolderEvents(projectFolders)
+}
+
+function updateProjectFoldersList() {
+    let projectFolders = document.querySelectorAll('.project-folder');
+    return projectFolders
 }
 
 
 
-export {updateFolders, loopItems, addClasses}
+
+export {updateFolders, loopItems, updateProjectFoldersList}
