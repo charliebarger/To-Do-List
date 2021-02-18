@@ -6,7 +6,3 @@ addMenuEvent()
 //hover and click project//
 updateFolders()
 callAddProjectListner()
-
-
-
-
