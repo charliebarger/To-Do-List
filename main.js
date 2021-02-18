@@ -12,7 +12,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "updateFolders": () => (/* binding */ updateFolders),
 /* harmony export */   "loopItems": () => (/* binding */ loopItems),
-/* harmony export */   "addClasses": () => (/* binding */ addClasses)
+/* harmony export */   "updateProjectFoldersList": () => (/* binding */ updateProjectFoldersList)
 /* harmony export */ });
 function addProjectFolderEvents(nodeList){
     nodeList.forEach(node => {
@@ -32,6 +32,7 @@ function addClickListners(nodeList, item){
 
 //loop through items and call removeClasses on each
 function loopItems(nodeList){
+    console.log(nodeList)
     nodeList.forEach(node => {
         removeClasses(node.lastElementChild, 'show-x' )
         removeClasses(node, 'selected-project')
@@ -61,9 +62,15 @@ function addClasses(item, CSSclass){
 }
 
 function updateFolders() {
-    let projectFolders = document.querySelectorAll('.project-folder');
+    let projectFolders = updateProjectFoldersList()
     addProjectFolderEvents(projectFolders)
 }
+
+function updateProjectFoldersList() {
+    let projectFolders = document.querySelectorAll('.project-folder');
+    return projectFolders
+}
+
 
 
 
@@ -107,7 +114,7 @@ function addMenuEvent(){
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "newProject": () => (/* binding */ newProject)
+/* harmony export */   "createNewFolder": () => (/* binding */ createNewFolder)
 /* harmony export */ });
 class newProject{
     constructor(title){
@@ -130,7 +137,7 @@ class newProject{
 
     createDelete(){
         let deleteButton = document.createElement('div');
-        deleteButton.classList.add("delete-icon")
+        deleteButton.classList.add("delete-icon", "show-x")
         return deleteButton
     }
 
@@ -141,8 +148,10 @@ class newProject{
     }
 }
 
-
-
+function createNewFolder(title) {
+    let folderProject = new newProject(title)
+    folderProject.createNewProject()
+}
 
 /***/ }),
 
@@ -155,7 +164,7 @@ class newProject{
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _burgerMenu__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./burgerMenu */ "./src/burgerMenu.js");
 /* harmony import */ var _Projectfolders__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Projectfolders */ "./src/Projectfolders.js");
-/* harmony import */ var _createNewProject__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./createNewProject */ "./src/createNewProject.js");
+/* harmony import */ var _projectTextfield__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./projectTextfield */ "./src/projectTextfield.js");
 
 
 
@@ -163,20 +172,58 @@ __webpack_require__.r(__webpack_exports__);
 (0,_burgerMenu__WEBPACK_IMPORTED_MODULE_0__.addMenuEvent)()
 //hover and click project//
 ;(0,_Projectfolders__WEBPACK_IMPORTED_MODULE_1__.updateFolders)()
+;(0,_projectTextfield__WEBPACK_IMPORTED_MODULE_2__.callAddProjectListner)()
 
 
-let project = document.getElementById('add-project')
-project.addEventListener('keydown', function(e){
+/***/ }),
+
+/***/ "./src/projectTextfield.js":
+/*!*********************************!*\
+  !*** ./src/projectTextfield.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "callAddProjectListner": () => (/* binding */ callAddProjectListner)
+/* harmony export */ });
+/* harmony import */ var _Projectfolders__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Projectfolders */ "./src/Projectfolders.js");
+/* harmony import */ var _createNewProject__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./createNewProject */ "./src/createNewProject.js");
+
+
+
+function callAddProjectListner() {
+    let project = document.getElementById('add-project')
+    let addButton = document.getElementById("add-project-button")
+
+    addButton.addEventListener('click', () => {
+    addInputedProject(project)
+})
+    project.addEventListener('keydown', function(e){
     if(e.key == 'Enter'){
-        let projectFolders = document.querySelectorAll('.project-folder');
-        let folderProject = new _createNewProject__WEBPACK_IMPORTED_MODULE_2__.newProject(project.value)
-        folderProject.createNewProject()
-        ;(0,_Projectfolders__WEBPACK_IMPORTED_MODULE_1__.updateFolders)()
-        project.value = ''
-        ;(0,_Projectfolders__WEBPACK_IMPORTED_MODULE_1__.loopItems)(projectFolders)
+        addInputedProject(project)
     }
 })
+}
 
+function addInputedProject(textField) {
+    if (textField.value){
+        //delete all current projects and delete selection classes
+        (0,_Projectfolders__WEBPACK_IMPORTED_MODULE_0__.loopItems)((0,_Projectfolders__WEBPACK_IMPORTED_MODULE_0__.updateProjectFoldersList)())
+        ;(0,_createNewProject__WEBPACK_IMPORTED_MODULE_1__.createNewFolder)(textField.value)
+        clearInput(textField)
+        //add event listners to new projects
+        ;(0,_Projectfolders__WEBPACK_IMPORTED_MODULE_0__.updateFolders)()
+    }
+}
+
+function clearInput(textField) {
+    textField.value = '';
+}
+
+document.getElementById('new-project').addEventListener('on', function(e) { 
+    e.preventDefault()
+})
 
 
 /***/ })
