@@ -249,6 +249,17 @@ ul li {
   color: white;
 }
 
+.add-icon:hover {
+  color: var(--blue);
+  background-color: white;
+  border: solid 1px var(--blue);
+}
+
+.add-icon:hover::before,
+.add-icon:hover::after {
+  background-color: var(--blue);
+}
+
 @media (min-width: 750px) {
   nav {
     width: 250px;
