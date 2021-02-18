@@ -1,5 +1,6 @@
 import {loopItems, updateFolders, updateProjectFoldersList} from "./Projectfolders"
 import {createNewFolder} from "./createNewProject"
+import {addNewFolder} from "./localStorage"
 
 export function callAddProjectListner() {
     let project = document.getElementById('add-project')
@@ -17,6 +18,7 @@ export function callAddProjectListner() {
 
 function addInputedProject(event, textField) {
     if (textField.value){
+        addNewFolder(textField.value)
         //delete all current projects and delete selection classes
         loopItems(updateProjectFoldersList())
         createNewFolder(textField.value)
