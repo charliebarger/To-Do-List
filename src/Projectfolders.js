@@ -16,7 +16,6 @@ function addClickListners(nodeList, item){
 
 //loop through items and call removeClasses on each
 function loopItems(nodeList){
-    console.log(nodeList)
     nodeList.forEach(node => {
         removeClasses(node.lastElementChild, 'show-x' )
         removeClasses(node, 'selected-project')

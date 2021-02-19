@@ -1,5 +1,5 @@
 import {loopItems, updateFolders, updateProjectFoldersList} from "./Projectfolders"
-import {createNewFolder} from "./createNewProject"
+import {createSelectedFolder} from "./createNewProject"
 import {addNewFolder} from "./localStorage"
 
 export function callAddProjectListner() {
@@ -7,29 +7,32 @@ export function callAddProjectListner() {
     let addButton = document.getElementById("add-project-button")
 
     addButton.addEventListener('click', function(e){
-        addInputedProject(e, project)
+        if (project.value){
+            addInputedProject(project.value)
+            clearInput(project, e)
+        }
 })
     project.addEventListener('keydown', function(e){
-    if(e.key == 'Enter'){
-        addInputedProject(e, project)
+    if(e.key == 'Enter' && project.value){
+        addInputedProject(project.value)
+        clearInput(project, e)
     }
 })
 }
 
-function addInputedProject(event, textField) {
-    if (textField.value){
-        addNewFolder(textField.value)
+function addInputedProject(textField) {
+    if (textField){
+        addNewFolder(textField)
         //delete all current projects and delete selection classes
         loopItems(updateProjectFoldersList())
-        createNewFolder(textField.value)
-        clearInput(textField)
+        createSelectedFolder(textField)
         //add event listners to new projects
         updateFolders()
-        event.preventDefault()
     }
 }
 
-function clearInput(textField) {
+function clearInput(textField, event) {
     textField.value = '';
+    event.preventDefault()
 }
 
