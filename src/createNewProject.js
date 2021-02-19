@@ -3,10 +3,13 @@ class newProject{
         this.title = title
     }
 
-    createWrapper() {
+    createWrapper(selectedClass = '') {
         let parent = document.querySelector('.project-list')
         let wrapper = document.createElement('div');
-        wrapper.classList.add("list-wrapper", "project-folder", "hover-project", "selected-project")
+        wrapper.classList.add("list-wrapper", "project-folder", "hover-project")
+        if(selectedClass){
+            wrapper.classList.add(selectedClass)
+        }
         parent.appendChild(wrapper)
         return wrapper
     }
@@ -17,20 +20,44 @@ class newProject{
         return content
     }
 
-    createDelete(){
+    createDelete(selectedClass = ''){
         let deleteButton = document.createElement('div');
-        deleteButton.classList.add("delete-icon", "show-x")
+        deleteButton.classList.add("delete-icon")
+        if(selectedClass){
+            deleteButton.classList.add(selectedClass)
+        }
         return deleteButton
     }
 
     createNewProject(){
         let wrapper = this.createWrapper()
         wrapper.append(this.createTitle(), this.createDelete() )
-        
-    }
+        }
 }
 
-export function createNewFolder(title) {
-    let folderProject = new newProject(title)
-    folderProject.createNewProject()
+class selectedProject extends newProject{
+    constructor(title){
+        super(title)
+    }
+    createNewProject(){
+        let wrapper = this.createWrapper('selected-project')
+        wrapper.append(this.createTitle(), this.createDelete('show-x') )
+    }
+    
 }
+
+function createNewFolder(className,title) {
+    let folderProject = new className(title)
+    folderProject.createNewProject()
+    return folderProject
+}
+
+function createSelectedFolder(title) {
+    createNewFolder(selectedProject, title)
+}
+
+function createNotSelectedFolder(title) {
+    createNewFolder(newProject, title)
+}
+
+export {createSelectedFolder, createNotSelectedFolder}
