@@ -1,9 +1,13 @@
 import {createSelectedFolder, createNotSelectedFolder} from "./createNewProject"
+import {removeAllProjects} from "./removeProjects"
 
-let folderTasks = {"default": []}
+let folderTasks = localStorage.getItem('Projects')
+  ? JSON.parse(localStorage.getItem('Projects'))
+  : [{"title": "Default", "tasks": [], "number": 0}]
 
 function addNewFolder(folderName) {
-    folderTasks[folderName] = []
+    let newFolder = {"title": folderName, "tasks": [], "number": 0}
+    folderTasks.push(newFolder)
     setLocalStorage()
 }
 
@@ -13,25 +17,19 @@ function addNewTasks(folderName, tasks){
 }
 
 function setLocalStorage(){
-    for (let key in folderTasks){
-        localStorage.setItem(JSON.stringify(key), JSON.stringify(folderTasks[key]))
-    }
+    localStorage.clear()
+    localStorage.setItem('Projects', JSON.stringify(folderTasks))
+    removeAllProjects()
     console.log(localStorage)
 }
 
 function getStorageItems() {
   setLocalStorage()
-  for (var i = localStorage.length -1; -1 < i; i--) {
-    let project = localStorage.key(i);
-    if(i == localStorage.length -1){
-        createSelectedFolder(JSON.parse(project))
+  let parsedProjects = JSON.parse(localStorage.getItem('Projects'))
+  for (let i = 0; i < parsedProjects.length; i++){
+      i == parsedProjects.length -1 ? createSelectedFolder(parsedProjects[i].title) : createNotSelectedFolder(parsedProjects[i].title)
+      }
     }
-    else{
-        createNotSelectedFolder(JSON.parse(project))
-    }
-    // let tasks = JSON.parse(localStorage.getItem(key))
-  }
-}
 
 
 export {addNewFolder, addNewTasks, getStorageItems}
