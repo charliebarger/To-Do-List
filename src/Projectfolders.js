@@ -1,9 +1,24 @@
+import {removeItem, getStorageItems} from "./localStorage"
+
 function addProjectFolderEvents(nodeList){
     nodeList.forEach(node => {
         addClickListners(nodeList, node)
         addHoverEffect(node, 'hover-x', node.lastElementChild)
     })
+    deleteItem()
 }
+
+function deleteItem(){
+    let deleteIt = document.querySelectorAll(".delete-it")
+    for(let count = 0 ; count < deleteIt.length ; count++) {
+        deleteIt[count].addEventListener('click', function(){
+        console.log(count)
+        removeItem(count)
+    });
+}
+}
+
+
 
 //call functions on click
 function addClickListners(nodeList, item){
@@ -16,7 +31,6 @@ function addClickListners(nodeList, item){
 
 //loop through items and call removeClasses on each
 function loopItems(nodeList){
-    console.log(nodeList)
     nodeList.forEach(node => {
         removeClasses(node.lastElementChild, 'show-x' )
         removeClasses(node, 'selected-project')

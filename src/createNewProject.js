@@ -22,7 +22,7 @@ class newProject{
 
     createDelete(selectedClass = ''){
         let deleteButton = document.createElement('div');
-        deleteButton.classList.add("delete-icon")
+        deleteButton.classList.add("delete-icon", "delete-it")
         if(selectedClass){
             deleteButton.classList.add(selectedClass)
         }

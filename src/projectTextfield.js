@@ -25,7 +25,7 @@ function addInputedProject(event, textField) {
         // createNewFolder(textField.value)
         clearInput(textField)
         // //add event listners to new projects
-        // updateFolders()
+        updateFolders()
         event.preventDefault()
     }
 }
