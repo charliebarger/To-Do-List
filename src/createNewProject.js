@@ -48,7 +48,6 @@ class selectedProject extends newProject{
 }
 
 function createNewFolder(className,title) {
-    removeSelection()
     let folderProject = new className(title)
     folderProject.createNewProject()
     updateFolders()
@@ -56,6 +55,7 @@ function createNewFolder(className,title) {
 }
 
 function createSelectedFolder(title) {
+    removeSelection()
     createNewFolder(selectedProject, title)
 }
 
