@@ -1,3 +1,4 @@
+import {updateFolders, removeSelection} from "./Projectfolders"
 class newProject{
     constructor(title){
         this.title = title
@@ -47,8 +48,10 @@ class selectedProject extends newProject{
 }
 
 function createNewFolder(className,title) {
+    removeSelection()
     let folderProject = new className(title)
     folderProject.createNewProject()
+    updateFolders()
     return folderProject
 }
 

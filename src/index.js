@@ -1,10 +1,10 @@
 import {addMenuEvent} from "./burgerMenu"
-import {updateFolders} from "./Projectfolders"
 import {callAddProjectListner} from "./projectTextfield"
-import {getStorageItems} from "./localStorage"
+import {getLocalStorageProject} from "./storage"
 //burger icon//
 addMenuEvent()
-getStorageItems()
 //hover and click project//
-updateFolders()
 callAddProjectListner()
+window.onload = () => {
+  getLocalStorageProject()
+};
