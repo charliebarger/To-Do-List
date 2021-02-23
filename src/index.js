@@ -5,6 +5,6 @@ import {getLocalStorageProject} from "./storage"
 addMenuEvent()
 //hover and click project//
 callAddProjectListner()
-window.onload = () => {
+// window.onload = () => {
   getLocalStorageProject()
-};
+// };

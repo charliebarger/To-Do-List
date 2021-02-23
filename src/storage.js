@@ -1,20 +1,36 @@
 import {createSelectedFolder, createNotSelectedFolder} from "./createNewProject"
+function getFolderTasks() {
+    let folderTasks = localStorage.getItem('Projects')
+    ? JSON.parse(localStorage.getItem('Projects'))
+    : [{"title": "Default"}]
+    return folderTasks
+}
 
-let folderTasks = localStorage.getItem('Projects')
-  ? JSON.parse(localStorage.getItem('Projects'))
-  : [{"title": "Default"}]
 
 function setLocalStorageProject(project) {
-    folderTasks.push({"title": project})
-    localStorage.setItem('Projects', JSON.stringify(folderTasks))
-    console.log(localStorage)
+    let folder = getFolderTasks()
+    folder.push({"title": project})
+    localStorage.setItem('Projects', JSON.stringify(folder))
 }
 
 function getLocalStorageProject() {
-    let parsedProjects = JSON.parse(localStorage.getItem('Projects'))
+    let parsedProjects = getFolderTasks()
     for (let i = 0; i < parsedProjects.length; i++){
         i == 0 ? createSelectedFolder(parsedProjects[i].title) : createNotSelectedFolder(parsedProjects[i].title)
     }
 }
 
-export {setLocalStorageProject, getLocalStorageProject}
+function checkForFoldersOfSameName(newProject){
+    let projects = getFolderTasks()
+    let check;
+    for (let folder of projects){
+        check = folder.title !== newProject ? true : false;
+        if (check == false){
+            break
+        }
+    }
+    return check
+}
+
+
+export {setLocalStorageProject, getLocalStorageProject, checkForFoldersOfSameName}
