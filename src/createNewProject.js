@@ -1,4 +1,5 @@
 import {updateFolders, removeSelection} from "./Projectfolders"
+import {removeFromStorage} from "./storage"
 class newProject{
     constructor(title){
         this.title = title
@@ -27,7 +28,15 @@ class newProject{
         if(selectedClass){
             deleteButton.classList.add(selectedClass)
         }
+        deleteButton.addEventListener('click', () => {
+            this.removeItem(deleteButton)
+        })
         return deleteButton
+    }
+
+    removeItem(item){
+        removeFromStorage(item.parentElement.firstElementChild.textContent)
+        item.parentElement.remove()
     }
 
     createNewProject(){

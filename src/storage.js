@@ -22,9 +22,11 @@ function getLocalStorageProject() {
 
 function checkForFoldersOfSameName(newProject){
     let projects = getFolderTasks()
-    let check;
+    let check = true;
     for (let folder of projects){
-        check = folder.title !== newProject ? true : false;
+        console.log(folder)
+        console.log(newProject)
+        check = folder.title.replaceAll(/\s/g,'') !== newProject ? true : false;
         if (check == false){
             break
         }
@@ -32,5 +34,14 @@ function checkForFoldersOfSameName(newProject){
     return check
 }
 
+function removeFromStorage(titleName){
+    let projects = getFolderTasks();
+    for (let index = 0; index < projects.length; index++){
+        if(projects[index].title == titleName){
+            projects.splice(index, 1)
+        }
+    }
+    localStorage.setItem('Projects', JSON.stringify(projects))
+}
 
-export {setLocalStorageProject, getLocalStorageProject, checkForFoldersOfSameName}
+export {setLocalStorageProject, getLocalStorageProject, checkForFoldersOfSameName, removeFromStorage}

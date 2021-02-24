@@ -16,13 +16,13 @@ export function callAddProjectListner() {
 }
 
 function addInputedProject(event, textField) {
-    if(textField.value.trim().length > 0 && checkForFoldersOfSameName(textField.value)){
+    if(textField.value.trim().length > 0 && checkForFoldersOfSameName(textField.value.replaceAll(/\s/g,''))){
         createSelectedFolder(textField.value)
         setLocalStorageProject(textField.value)
         clearInput(textField)
         event.preventDefault()
     }
-    else if(!checkForFoldersOfSameName(textField.value)){
+    else if(!checkForFoldersOfSameName(textField.value.replaceAll(/\s/g,''))){
         clearInput(textField)
         event.preventDefault()
         alert('This Project Folder Already Exists')
