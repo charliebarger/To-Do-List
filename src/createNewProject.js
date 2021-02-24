@@ -1,5 +1,6 @@
 import {updateFolders, removeSelection} from "./Projectfolders"
 import {removeFromStorage} from "./storage"
+import {appendTaskName} from "./selectTask"
 class newProject{
     constructor(title){
         this.title = title
@@ -13,6 +14,9 @@ class newProject{
             wrapper.classList.add(selectedClass)
         }
         parent.appendChild(wrapper)
+        wrapper.addEventListener('click', () => {
+            appendTaskName(wrapper.firstElementChild.textContent)
+        } )
         return wrapper
     }
 
