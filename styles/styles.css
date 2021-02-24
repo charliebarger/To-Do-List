@@ -82,6 +82,7 @@ h1 span {
 
 /* navbar */
 nav {
+  top: 66px;
   position: absolute;
   background: var(--dark-grey);
   color: white;
@@ -260,10 +261,31 @@ ul li {
   background-color: var(--blue);
 }
 
-@media (min-width: 750px) {
+#task-section h2 {
+  margin: 10px;
+  text-align: left;
+  color: var(--off-black);
+  margin-top: 27px;
+  margin-left: 40px;
+}
+
+@media (min-width: 650px) {
+  main {
+    display: flex;
+  }
   nav {
-    width: 250px;
-    left: 0;
+    flex-basis: 250px;
+    flex: 1;
+    position: static;
+    min-height: calc(100vh - 66px);
+  }
+
+  .hamburger {
+    display: none;
+  }
+
+  #task-section {
+    flex: 2.5;
   }
   .list-wrapper {
     padding: 10px;
