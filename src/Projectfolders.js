@@ -14,7 +14,6 @@ import {appendTaskName} from "./selectTask"
 //call functions on click
 function addClickListners(item){
     item.addEventListener('click', () => {
-        console.log('hello')
     loopItems(updateProjectFoldersList())
     addClasses(item,'selected-project')
     addClasses(item.lastElementChild, 'show-x')

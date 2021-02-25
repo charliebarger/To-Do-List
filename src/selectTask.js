@@ -11,13 +11,33 @@ function selectFirstProject() {
 function appendTaskName(projectName) {
     let taskNameWrapper = document.getElementById('selected-task')
     taskNameWrapper.textContent = projectName
-    addTasks(taskNameWrapper) 
 }
 
-function addTasks(project){
-    console.log('reached')
+function getSelectedFolderName() {
+    let projects = document.querySelectorAll('.project-folder')
+    for(let i = 0; i < projects.length; i++){
+        if(projects[i].classList.contains('selected-project')){
+            console.log('got it')
+            return projects[i].firstChild.textContent
+    }
+}
+}
+
+function addTaskListner() {
+    let newTask = document.getElementById('addTaskForm')
+    newTask.addEventListener('submit', (e) => {
+        e.preventDefault()
+        let taskValue = document.getElementById('addTaskInput').value
+        console.log(taskValue)
+        if (taskValue){
+            addStorageTasks(getSelectedFolderName(), taskValue)
+        }
+    })
+}
+
+function addTasks(project, task){
     console.log(project.textContent)
-    addStorageTasks(project.textContent, 'fuck eat penis')
+    addStorageTasks(project.textContent, task)
 }
 
-export {selectFirstProject, appendTaskName}
+export {selectFirstProject, appendTaskName, addTaskListner}
