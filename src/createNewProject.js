@@ -1,6 +1,7 @@
-import {updateFolders, removeSelection} from "./Projectfolders"
+import {removeSelection} from "./Projectfolders"
 import {removeFromStorage} from "./storage"
 import {selectFirstProject, appendTaskName} from "./selectTask"
+import {addClickListners} from "./Projectfolders"
 class newProject{
     constructor(title){
         this.title = title
@@ -14,7 +15,7 @@ class newProject{
             wrapper.classList.add(selectedClass)
         }
         parent.appendChild(wrapper)
-
+        addClickListners(wrapper)
         return wrapper
     }
 
@@ -65,7 +66,6 @@ class selectedProject extends newProject{
 function createNewFolder(className,title) {
     let folderProject = new className(title)
     folderProject.createNewProject()
-    updateFolders()
     return folderProject
 }
 

@@ -1,5 +1,6 @@
 import {createSelectedFolder} from "./createNewProject"
 import {setLocalStorageProject, checkForFoldersOfSameName} from "./storage"
+import {updateFolders} from "./Projectfolders"
 
 export function callAddProjectListner() {
     let project = document.getElementById('add-project')
@@ -30,7 +31,6 @@ function addInputedProject(event, textField) {
     else{
         clearInput(textField)
     }
-
 }
 
 function clearInput(textField) {

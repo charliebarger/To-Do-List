@@ -1,18 +1,25 @@
 import {appendTaskName} from "./selectTask"
-function addProjectFolderEvents(nodeList){
-    nodeList.forEach(node => {
-        addClickListners(nodeList, node)
-        addHoverEffect(node, 'hover-x', node.lastElementChild)
-    })
-}
+// function addProjectFolderEvents(nodeList){
+//     nodeList.forEach(node => {
+//         console.log(node.firstChild.textContent)
+//         node.addEventListener('click', () => {
+//             console.log('hi')
+//             node.style.color = "red"
+//         })
+//         // addClickListners(nodeList, node)
+//         // addHoverEffect(node, 'hover-x', node.lastElementChild)
+//     })
+// }
 
 //call functions on click
-function addClickListners(nodeList, item){
+function addClickListners(item){
     item.addEventListener('click', () => {
-    loopItems(nodeList)
+        console.log('hello')
+    loopItems(updateProjectFoldersList())
     addClasses(item,'selected-project')
     addClasses(item.lastElementChild, 'show-x')
     appendTaskName(item.firstChild.textContent)
+    addHoverEffect(item, 'hover-x', item.lastElementChild)
   })
 }
 
@@ -46,10 +53,10 @@ function addClasses(item, CSSclass){
     item.classList.add(CSSclass)
 }
 
-function updateFolders() {
-    let projectFolders = updateProjectFoldersList()
-    addProjectFolderEvents(projectFolders)
-}
+// function updateFolders() {
+//     let projectFolders = updateProjectFoldersList()
+//     addProjectFolderEvents(projectFolders)
+// }
 
 function updateProjectFoldersList() {
     let projectFolders = document.querySelectorAll('.project-folder');
@@ -63,4 +70,4 @@ function removeSelection() {
 
 
 
-export {updateFolders, removeSelection, updateProjectFoldersList}
+export {removeSelection, updateProjectFoldersList, addClickListners}

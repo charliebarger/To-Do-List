@@ -10,7 +10,6 @@ function getFolderTasks() {
 
 function setLocalStorageProject(project) {
     let folder = getFolderTasks()
-    console.log(getFolderTasks())
     folder.push({"title": project, "tasks": []})
     localStorage.setItem('Projects', JSON.stringify(folder))
 }
@@ -38,8 +37,6 @@ function checkForFoldersOfSameName(newProject){
     let projects = getFolderTasks()
     let check = true;
     for (let folder of projects){
-        console.log(folder)
-        console.log(newProject)
         check = folder.title.replaceAll(/\s/g,'') !== newProject ? true : false;
         if (check == false){
             break
