@@ -1,3 +1,4 @@
+import {appendTaskName} from "./selectTask"
 function addProjectFolderEvents(nodeList){
     nodeList.forEach(node => {
         addClickListners(nodeList, node)
@@ -11,6 +12,7 @@ function addClickListners(nodeList, item){
     loopItems(nodeList)
     addClasses(item,'selected-project')
     addClasses(item.lastElementChild, 'show-x')
+    appendTaskName(item.firstChild.textContent)
   })
 }
 

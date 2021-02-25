@@ -6,5 +6,5 @@ addMenuEvent()
 //hover and click project//
 callAddProjectListner()
 // window.onload = () => {
-  getLocalStorageProject()
+getLocalStorageProject()
 // };

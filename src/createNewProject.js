@@ -1,6 +1,6 @@
 import {updateFolders, removeSelection} from "./Projectfolders"
 import {removeFromStorage} from "./storage"
-import {appendTaskName} from "./selectTask"
+import {selectFirstProject, appendTaskName} from "./selectTask"
 class newProject{
     constructor(title){
         this.title = title
@@ -14,9 +14,7 @@ class newProject{
             wrapper.classList.add(selectedClass)
         }
         parent.appendChild(wrapper)
-        wrapper.addEventListener('click', () => {
-            appendTaskName(wrapper.firstElementChild.textContent)
-        } )
+
         return wrapper
     }
 
@@ -32,8 +30,10 @@ class newProject{
         if(selectedClass){
             deleteButton.classList.add(selectedClass)
         }
-        deleteButton.addEventListener('click', () => {
+        selectedClass
+        deleteButton.addEventListener('click', (e) => {
             this.removeItem(deleteButton)
+            e.stopPropagation()
         })
         return deleteButton
     }
@@ -41,6 +41,7 @@ class newProject{
     removeItem(item){
         removeFromStorage(item.parentElement.firstElementChild.textContent)
         item.parentElement.remove()
+        selectFirstProject()
     }
 
     createNewProject(){
@@ -56,6 +57,7 @@ class selectedProject extends newProject{
     createNewProject(){
         let wrapper = this.createWrapper('selected-project')
         wrapper.append(this.createTitle(), this.createDelete('show-x') )
+        appendTaskName(wrapper.firstChild.textContent)
     }
     
 }

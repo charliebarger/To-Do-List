@@ -1,17 +1,31 @@
 import {createSelectedFolder, createNotSelectedFolder} from "./createNewProject"
 function getFolderTasks() {
-    let folderTasks = localStorage.getItem('Projects')
-    ? JSON.parse(localStorage.getItem('Projects'))
-    : [{"title": "Default"}]
+    if(!localStorage.getItem('Projects')){
+        localStorage.setItem('Projects',JSON.stringify([{"title": "Default", "tasks": []}]))
+    }
+    let folderTasks = JSON.parse(localStorage.getItem('Projects'))
     return folderTasks
 }
 
 
 function setLocalStorageProject(project) {
     let folder = getFolderTasks()
-    folder.push({"title": project})
+    console.log(getFolderTasks())
+    folder.push({"title": project, "tasks": []})
     localStorage.setItem('Projects', JSON.stringify(folder))
 }
+
+function addStorageTasks(project, task) {
+    let localFolder = getFolderTasks()
+    localFolder.forEach(folder => {
+        if (folder.title == project){
+            folder.tasks.push(task)
+        }
+    });
+    localStorage.setItem('Projects', JSON.stringify(localFolder))
+}
+
+
 
 function getLocalStorageProject() {
     let parsedProjects = getFolderTasks()
@@ -44,4 +58,4 @@ function removeFromStorage(titleName){
     localStorage.setItem('Projects', JSON.stringify(projects))
 }
 
-export {setLocalStorageProject, getLocalStorageProject, checkForFoldersOfSameName, removeFromStorage}
+export {setLocalStorageProject, getLocalStorageProject, checkForFoldersOfSameName, removeFromStorage, addStorageTasks}
