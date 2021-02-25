@@ -16,6 +16,7 @@ function setLocalStorageProject(project) {
 
 function addStorageTasks(project, task) {
     let localFolder = getFolderTasks()
+    console.log(localFolder)
     localFolder.forEach(folder => {
         if (folder.title == project){
             folder.tasks.push(task)

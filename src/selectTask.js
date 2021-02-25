@@ -11,12 +11,13 @@ function selectFirstProject() {
 function appendTaskName(projectName) {
     let taskNameWrapper = document.getElementById('selected-task')
     taskNameWrapper.textContent = projectName
-    addTasks() 
+    addTasks(taskNameWrapper) 
 }
 
-function addTasks(){
-    let taskNameWrapper = document.getElementById('selected-task')
-    addStorageTasks(taskNameWrapper.textContent, 'fuck eat penis')
+function addTasks(project){
+    console.log('reached')
+    console.log(project.textContent)
+    addStorageTasks(project.textContent, 'fuck eat penis')
 }
 
 export {selectFirstProject, appendTaskName}
