@@ -1,7 +1,7 @@
 import {createSelectedFolder, createNotSelectedFolder} from "./createNewProject"
 function getFolderTasks() {
     if(!localStorage.getItem('Projects')){
-        localStorage.setItem('Projects', JSON.stringify([{"title": "Default", "tasks":[]}]))
+        localStorage.setItem('Projects',JSON.stringify([{"title": "Default", "tasks": []}]))
     }
     let folderTasks = JSON.parse(localStorage.getItem('Projects'))
     return folderTasks
@@ -10,7 +10,7 @@ function getFolderTasks() {
 
 function setLocalStorageProject(project) {
     let folder = getFolderTasks()
-    folder.push({"title":project,"tasks":[]})
+    folder.push({"title": project, "tasks": []})
     localStorage.setItem('Projects', JSON.stringify(folder))
 }
 

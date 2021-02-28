@@ -18,10 +18,10 @@ export function callAddProjectListner() {
 
 function addInputedProject(event, textField) {
     if(textField.value.trim().length > 0 && checkForFoldersOfSameName(textField.value.replaceAll(/\s/g,''))){
-        event.preventDefault()
         setLocalStorageProject(textField.value)
         createSelectedFolder(textField.value)
         clearInput(textField)
+        event.preventDefault()
     }
     else if(!checkForFoldersOfSameName(textField.value.replaceAll(/\s/g,''))){
         clearInput(textField)

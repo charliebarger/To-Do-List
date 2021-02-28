@@ -1,33 +1,18 @@
 import {appendTaskName} from "./selectTask"
-// function addProjectFolderEvents(nodeList){
-//     nodeList.forEach(node => {
-//         console.log(node.firstChild.textContent)
-//         node.addEventListener('click', () => {
-//             console.log('hi')
-//             node.style.color = "red"
-//         })
-//         // addClickListners(nodeList, node)
-//         // addHoverEffect(node, 'hover-x', node.lastElementChild)
-//     })
-// }
 
-//call functions on click
 function addClickListners(item){
-    item.addEventListener('click', () => {
-    loopItems(updateProjectFoldersList())
-    addClasses(item,'selected-project')
-    addClasses(item.lastElementChild, 'show-x')
-    appendTaskName(item.firstChild.textContent)
     addHoverEffect(item, 'hover-x', item.lastElementChild)
+    item.addEventListener('click', () => {
+        renderSelectedClass(item)
+        appendTaskName(item.firstChild.textContent)
   })
 }
 
-//loop through items and call removeClasses on each
-function loopItems(nodeList){
-    nodeList.forEach(node => {
-        removeClasses(node.lastElementChild, 'show-x' )
-        removeClasses(node, 'selected-project')
-    })
+//removes selection class and adds selection classes to new item
+function renderSelectedClass(item) {
+    removeSelection()
+    item.classList.add('selected-project')
+    item.lastElementChild.classList.add('show-x')
 }
 
 //uses mouseover and mouseleave to create a hover effect. The mouseover can be on one element and effect another
@@ -37,7 +22,15 @@ function addHoverEffect(itemHovered, CSSclass, itemWitheffect = itemHovered){
    })
    itemHovered.addEventListener('mouseleave', () => {
     itemWitheffect.classList.remove('hover-x')
-  })
+})
+}
+
+//remove selection classes
+function removeSelection(){
+    updateProjectFoldersList().forEach(folder => {
+        removeClasses(folder.lastElementChild, 'show-x' )
+        removeClasses(folder, 'selected-project')
+    })
 }
 
 //if an item contains a class remove that class
@@ -47,26 +40,9 @@ function removeClasses(item, CSSclass){
     }
 }
 
-//adds css classes
-function addClasses(item, CSSclass){
-    item.classList.add(CSSclass)
-}
-
-// function updateFolders() {
-//     let projectFolders = updateProjectFoldersList()
-//     addProjectFolderEvents(projectFolders)
-// }
-
 function updateProjectFoldersList() {
     let projectFolders = document.querySelectorAll('.project-folder');
     return projectFolders
 }
 
-function removeSelection() {
-    loopItems(updateProjectFoldersList())
-}
-
-
-
-
-export {removeSelection, updateProjectFoldersList, addClickListners}
+export {addClickListners, removeSelection}
