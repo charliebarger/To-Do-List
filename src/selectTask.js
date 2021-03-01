@@ -36,4 +36,4 @@ function addTaskListner() {
 }
 
 
-export {selectFirstProject, appendProjectName, addTaskListner}
+export {selectFirstProject, appendProjectName, addTaskListner, getSelectedFolderName}

@@ -1,4 +1,5 @@
 import {createSelectedFolder, createNotSelectedFolder} from "./createNewProject"
+import {getSelectedFolderName} from "./selectTask"
 
 function getFolderAndTasks() {
     if(!localStorage.getItem('Projects')){
@@ -14,14 +15,15 @@ function setLocalStorageProject(project) {
     localStorage.setItem('Projects', JSON.stringify(folder))
 }
 
-function addStorageTasks(project, task) {
+function addStorageTasks(task) {
     let localFolder = getFolderAndTasks()
-    console.log(localFolder)
-    localFolder.forEach(folder => {
-        if (folder.title == project){
-            folder.tasks.push(task)
+    let selectedFolder = getSelectedFolderName()
+    for (let i = 0; i < localFolder.length; i++){
+        if (localFolder[i].title == selectedFolder){
+            localFolder[i].tasks.push(task)
+            break
         }
-    });
+    }
     localStorage.setItem('Projects', JSON.stringify(localFolder))
 }
 
@@ -34,7 +36,8 @@ function getLocalStorageProject() {
 
 function checkForFoldersOfSameName(newProject){
     let projects = getFolderAndTasks()
-    let check = true;
+    console.log(projects)
+    let check = false;
     for (let folder of projects){
         check = folder.title.replaceAll(/\s/g,'') == newProject.replaceAll(/\s/g,'') ? true : false;
         if (check == true){
@@ -42,6 +45,19 @@ function checkForFoldersOfSameName(newProject){
         }
     }
     return check
+}
+
+function checkForTasksOfSameName(task) {
+    let projects = getFolderAndTasks()
+    let selectedProject = getSelectedFolderName()
+    for (let folder of projects){
+        if (folder.title == selectedProject){
+            if(folder.tasks.includes(task)){
+                return true
+            }
+        }
+    }
+    return false
 }
 
 function removeFromStorage(titleName){
@@ -54,4 +70,4 @@ function removeFromStorage(titleName){
     localStorage.setItem('Projects', JSON.stringify(projects))
 }
 
-export {setLocalStorageProject, getLocalStorageProject, checkForFoldersOfSameName, removeFromStorage, addStorageTasks}
+export {setLocalStorageProject, getLocalStorageProject, checkForFoldersOfSameName, removeFromStorage, addStorageTasks, checkForTasksOfSameName}

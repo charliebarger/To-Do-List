@@ -4,27 +4,24 @@ import {setLocalStorageProject, checkForFoldersOfSameName} from "./storage"
 export function callAddProjectListner() {
     let project = document.getElementById('add-project')
     let addButton = document.getElementById("add-project-button")
-
     addButton.addEventListener('click', function(e){
         addInputedProject(e, project)
-})
+    })
     project.addEventListener('keydown', function(e){
-    if(e.key == 'Enter'){
-        addInputedProject(e, project)
-    }
-})
+        if(e.key == 'Enter'){
+            addInputedProject(e, project)
+        }
+    })
 }
 
 function addInputedProject(event, textField) {
-    if(textField.value.trim().length > 0 && !checkForFoldersOfSameName(textField.value)){
+    if(validateFormIsNotBlank(textField, checkForFoldersOfSameName)){
         setLocalStorageProject(textField.value)
         createSelectedFolder(textField.value)
-        clearInput(textField)
-        event.preventDefault()
+        resetTextfield(textField, event)
     }
     else if(checkForFoldersOfSameName(textField.value)){
-        clearInput(textField)
-        event.preventDefault()
+        resetTextfield()
         alert('This Project Folder Already Exists')
     }
     else{
@@ -32,7 +29,17 @@ function addInputedProject(event, textField) {
     }
 }
 
+function validateFormIsNotBlank(textField, validationFunction){
+      return textField.value.trim().length > 0 && !validationFunction(textField.value) ? true : false
+}
+
+function resetTextfield(textField, event) {
+    clearInput(textField)
+    event.preventDefault()
+}
+
 function clearInput(textField) {
     textField.value = '';
 }
 
+export {validateFormIsNotBlank, resetTextfield, clearInput}
