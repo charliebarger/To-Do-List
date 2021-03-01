@@ -1,6 +1,5 @@
 import {createSelectedFolder} from "./createNewProject"
 import {setLocalStorageProject, checkForFoldersOfSameName} from "./storage"
-import {updateFolders} from "./Projectfolders"
 
 export function callAddProjectListner() {
     let project = document.getElementById('add-project')
@@ -17,13 +16,13 @@ export function callAddProjectListner() {
 }
 
 function addInputedProject(event, textField) {
-    if(textField.value.trim().length > 0 && checkForFoldersOfSameName(textField.value.replaceAll(/\s/g,''))){
+    if(textField.value.trim().length > 0 && !checkForFoldersOfSameName(textField.value)){
         setLocalStorageProject(textField.value)
         createSelectedFolder(textField.value)
         clearInput(textField)
         event.preventDefault()
     }
-    else if(!checkForFoldersOfSameName(textField.value.replaceAll(/\s/g,''))){
+    else if(checkForFoldersOfSameName(textField.value)){
         clearInput(textField)
         event.preventDefault()
         alert('This Project Folder Already Exists')

@@ -1,11 +1,26 @@
-import {appendTaskName} from "./selectTask"
+import {removeFromStorage} from "./storage"
+import {selectFirstProject, appendProjectName} from "./selectTask"
 
 function addClickListners(item){
     addHoverEffect(item, 'hover-x', item.lastElementChild)
     item.addEventListener('click', () => {
         renderSelectedClass(item)
-        appendTaskName(item.firstChild.textContent)
+        appendProjectName(item.firstChild.textContent)
   })
+}
+
+function deleteButtonListner(item) {
+    item.addEventListener('click', (e) => {
+        removeFromStorage(item.parentElement.firstElementChild.textContent)
+        renderProjectRemoval(item)
+        e.stopPropagation()
+    })
+}
+
+function renderProjectRemoval(item){
+        item.parentElement.remove()
+        appendProjectName('')
+        selectFirstProject()
 }
 
 //removes selection class and adds selection classes to new item
@@ -45,4 +60,4 @@ function updateProjectFoldersList() {
     return projectFolders
 }
 
-export {addClickListners, removeSelection}
+export {addClickListners, removeSelection, deleteButtonListner}

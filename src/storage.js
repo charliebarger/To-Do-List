@@ -1,5 +1,6 @@
 import {createSelectedFolder, createNotSelectedFolder} from "./createNewProject"
-function getFolderTasks() {
+
+function getFolderAndTasks() {
     if(!localStorage.getItem('Projects')){
         localStorage.setItem('Projects',JSON.stringify([{"title": "Default", "tasks": []}]))
     }
@@ -7,15 +8,14 @@ function getFolderTasks() {
     return folderTasks
 }
 
-
 function setLocalStorageProject(project) {
-    let folder = getFolderTasks()
+    let folder = getFolderAndTasks()
     folder.push({"title": project, "tasks": []})
     localStorage.setItem('Projects', JSON.stringify(folder))
 }
 
 function addStorageTasks(project, task) {
-    let localFolder = getFolderTasks()
+    let localFolder = getFolderAndTasks()
     console.log(localFolder)
     localFolder.forEach(folder => {
         if (folder.title == project){
@@ -25,21 +25,19 @@ function addStorageTasks(project, task) {
     localStorage.setItem('Projects', JSON.stringify(localFolder))
 }
 
-
-
 function getLocalStorageProject() {
-    let parsedProjects = getFolderTasks()
+    let parsedProjects = getFolderAndTasks()
     for (let i = 0; i < parsedProjects.length; i++){
         i == 0 ? createSelectedFolder(parsedProjects[i].title) : createNotSelectedFolder(parsedProjects[i].title)
     }
 }
 
 function checkForFoldersOfSameName(newProject){
-    let projects = getFolderTasks()
+    let projects = getFolderAndTasks()
     let check = true;
     for (let folder of projects){
-        check = folder.title.replaceAll(/\s/g,'') !== newProject ? true : false;
-        if (check == false){
+        check = folder.title.replaceAll(/\s/g,'') == newProject.replaceAll(/\s/g,'') ? true : false;
+        if (check == true){
             break
         }
     }
@@ -47,7 +45,7 @@ function checkForFoldersOfSameName(newProject){
 }
 
 function removeFromStorage(titleName){
-    let projects = getFolderTasks();
+    let projects = getFolderAndTasks();
     for (let index = 0; index < projects.length; index++){
         if(projects[index].title == titleName){
             projects.splice(index, 1)
