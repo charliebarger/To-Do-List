@@ -40,11 +40,23 @@
             </form>
         </nav>
         <section id="task-section">
-            <h2 id= "selected-task"></h2>
-            <form action="" id="addTaskForm">
+            <section class="task-header">
+                <div class="img-wrapper">
+                    <img src="./img/iconmonstr-check-mark-6.svg" alt="">
+                </div>
+                <h2 id= "selected-task"></h2>
+                <span id = "tasks-left" class="right-span">0 tasks remaining</span>
+            </section>
+            <section class="add-delete-section">
+                <div class="add-task"></div>
+                <div class="clear-completed"><span>Clear Completed Tasks</span>
+                <div class="trash-wrap"><img src="./img/trash.svg" alt=""></div>
+                </div>
+            </section>
+            <!-- <form action="" id="addTaskForm">
                 <input type="text" name="" id="addTaskInput" required>
                 <button type="submit" id="addTaskButton">Submit</button>
-            </form>
+            </form> -->
         </section>
     </main>
 </body>
