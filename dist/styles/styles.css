@@ -89,6 +89,7 @@ nav {
   min-height: calc(100% - 66px);
   width: 100%;
   right: 100%;
+  z-index: 1;
 }
 
 nav.active {
@@ -261,12 +262,90 @@ ul li {
   background-color: var(--blue);
 }
 
-#task-section h2 {
-  margin: 10px;
+.task-header h2 {
   text-align: left;
   color: var(--off-black);
-  margin-top: 27px;
-  margin-left: 40px;
+  margin-left: 10px;
+  font-weight: 400;
+}
+
+.img-wrapper {
+  display: flex;
+}
+
+.task-header {
+  display: flex;
+  align-items: center;
+}
+
+.right-span {
+  margin-left: auto;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+#task-section {
+  min-height: calc(100vh - 66px);
+  background: var(--light-blue);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.add-task {
+  height: 35px;
+  width: 35px;
+  border: var(--blue) solid 2px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 6px;
+}
+
+.add-task::before,
+.add-task::after {
+  height: 3px;
+  width: 100%;
+  background-color: var(--off-black);
+  content: "";
+  display: block;
+  z-index: 0;
+}
+.add-task::after {
+  transform: translateY(-1.5px);
+}
+
+.add-task::before {
+  transform: translateY(1.5px) rotate(90deg);
+}
+
+.add-delete-section {
+  display: flex;
+  align-items: center;
+  margin-top: auto;
+}
+
+.clear-completed {
+  border: var(--blue) solid 2px;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  height: 35px;
+  padding: 20px;
+
+  border-radius: 20px;
+  color: black;
+  font-size: 16px;
+}
+
+.trash-wrap {
+  height: 15px;
+  margin-left: 5px;
+}
+.trash-wrap img {
+  height: 100%;
 }
 
 @media (min-width: 650px) {
@@ -275,7 +354,7 @@ ul li {
   }
   nav {
     flex-basis: 250px;
-    flex: 1;
+    flex: 1.5;
     position: static;
     min-height: calc(100vh - 66px);
   }
