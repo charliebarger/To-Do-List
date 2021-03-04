@@ -296,6 +296,7 @@ ul li {
   padding: 30px;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .add-task:hover {
@@ -387,6 +388,44 @@ svg::hover {
   height: 50vh;
   width: 50vh;
   margin: auto;
+}
+
+.child-wrapper {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.blur-It {
+  filter: blur(10px);
+}
+
+.addTaskForm {
+  height: 350px;
+  width: 300px;
+  border: var(--black) solid 3px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin-bottom: auto;
+  margin-top: auto;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  transform: translateY(-5px);
+  background: white;
+  opacity: 99%;
+  border-radius: 10px;
+}
+
+.addTaskForm h4 {
+  color: var(--blue);
+  font-size: 24px;
+  font-weight: 400;
+  text-align: center;
 }
 
 @media (min-width: 650px) {
