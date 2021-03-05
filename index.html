@@ -35,7 +35,7 @@
             </div>
         <ul class="project-list" id="project-parent"></ul>
             <form class="list-wrapper add-new-project" id="new-project">
-                <input type="text" name="" id="add-project" required placeholder="Add Project" autocomplete="off">
+                <input type="text" name="" id="add-project" required placeholder="Add Project" autocomplete="off" maxlength="40">
                 <button class='delete-icon add-icon' id="add-project-button"class="button1" type="submit" id="submitIt" value=""></button>
             </form>
         </nav>
@@ -53,6 +53,9 @@
                     <img src="./img/20944361.jpg" alt="">
                 </div>
             </section>
+            <div>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sequi commodi quia assumenda laborum? Assumenda, eum nam, maxime sunt iusto sequi harum consectetur rerum deleniti quam deserunt obcaecati. Omnis, adipisci architecto facilis ut, veritatis quae nisi dolorem provident recusandae sequi deserunt ab odio aliquid iure ipsa dicta. Cupiditate hic a eum voluptatibus rerum molestiae corporis dolore dolor nemo nulla praesentium atque officia placeat fugiat dolores veritatis, quia unde itaque explicabo molestias! Tempora error doloribus atque, obcaecati accusantium saepe minima excepturi quae ullam corporis, fuga veritatis vel. Dolores similique non veniam iste fuga earum, aspernatur reprehenderit delectus cumque nesciunt in! Inventore mollitia consequatur ratione nam illo. Quis beatae fuga praesentium! Voluptatibus consequuntur sequi inventore sed optio rerum provident quibusdam accusantium? Reiciendis recusandae necessitatibus commodi quibusdam, repudiandae fugit. Et, similique voluptatum neque enim, dignissimos ratione consequatur ullam eaque eligendi, dolorum deserunt. Exercitationem commodi illo alias deleniti ratione odio doloribus! Porro enim tempora eaque ipsa, harum accusantium labore facilis maxime, architecto, corrupti exercitationem quia! Corporis sequi unde ea quis error aperiam quas dolor cum facere pariatur quasi provident iste doloribus laborum nulla voluptatem, quo, reiciendis quisquam porro sit aliquam! Quod magni quam magnam minus, praesentium explicabo reiciendis exercitationem doloribus! Eum dolores sit totam accusamus repudiandae sequi sint minus velit porro itaque officia ab et, ullam hic est placeat! Veritatis sit fugit est, consequatur distinctio maxime placeat sunt voluptatem, nisi dolorum quod atque. Amet hic fugiat dignissimos nam consequuntur quos at quaerat? Eveniet reiciendis animi laborum reprehenderit explicabo, illum soluta voluptates perferendis exercitationem pariatur, labore dicta cupiditate id nihil laudantium dolor, voluptatibus molestiae repellat at totam a qui. Totam exercitationem harum sit quo eaque aut repellendus ipsa! Laborum consequuntur magnam facere neque sint, laboriosam vero illo ut consectetur voluptatibus beatae quo obcaecati soluta possimus. Nobis soluta quia ab ratione assumenda sunt itaque a, quae non fuga velit, alias sit animi numquam commodi in aperiam earum ex deserunt est error voluptas exercitationem. Velit, excepturi. Officiis omnis quidem nam corporis at! Obcaecati nam, dolore voluptatibus dicta placeat optio perspiciatis beatae dignissimos labore eos numquam provident, quibusdam facilis quo a blanditiis quos doloribus accusantium, quaerat perferendis cupiditate! Quidem magnam nihil alias, aliquam corporis eaque veritatis iste quia blanditiis, ad doloribus officia est beatae sed totam. Facilis nostrum nulla saepe rerum minus. At dolore veritatis placeat cupiditate adipisci deserunt laboriosam excepturi. Dicta dolore hic eaque, maiores nam natus, nulla maxime tenetur temporibus blanditiis quos quis facilis, ducimus repellat laborum.</p>
+            </div>
             <section class="add-delete-section">
                 <div class="add-task">
                     <div class="add-task-wrapper"></div>
@@ -73,9 +76,29 @@
                 </svg></div>
                 </div>
                 </div>
+                
                 <form action="#" class="addTaskForm">
                     <h4>New Task</h4>
-                    <input type="text" name="" id="addTaskInput" required>
+                    <div>
+                        <label for="task-name">Add Task:</label>
+                        <input type="text" name="" id="task-name" required>
+                    </div>
+                    <div>
+                        <label for="task-due-date">Due Date:</label>
+                        <input type="date" id="task-due-date">
+                    </div>
+                    <div>
+                        <label for="task-priority">Priority:</label>
+                        <select name="" id="task-priority">
+                            <option value="1">Low</option>
+                            <option value="2">Medium</option>
+                            <option value="3">High</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="task-description">Comments</label>
+                        <textarea id="w3review" name="w3review" rows="4"></textarea>
+                    </div>
                 </form>
             </section>
             <!-- <form action="" id="addTaskForm">
