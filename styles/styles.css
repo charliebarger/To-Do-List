@@ -404,21 +404,20 @@ svg::hover {
   justify-content: space-between;
 }
 
-.blur-It {
-  /* filter: blur(10px); */
+.blur-it {
+  filter: blur(10px);
 }
 
 .addTaskForm {
-  height: 350px;
+  height: 375px;
   width: 300px;
   border: var(--black) solid 3px;
   position: absolute;
   left: 0;
   right: 0;
-  top: 0;
-  bottom: 0;
+  top: 75px;
   margin: auto;
-  padding: 20px;
+  padding: 10px 20px;
   transform: translateY(-5px);
   background: white;
   opacity: 99%;
@@ -427,6 +426,9 @@ svg::hover {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+}
+
+.hide-task-form {
   display: none;
 }
 
@@ -450,6 +452,36 @@ svg::hover {
 .hide-content {
   max-height: calc(100vh - 66px);
   overflow: hidden;
+}
+
+.task-buttons {
+  flex-direction: row !important;
+  margin-top: 5px;
+  height: 35px;
+  gap: 20px;
+}
+
+.task-buttons > button {
+  flex: 1;
+  color: white;
+  background: white;
+  border: var(--blue) solid 2px;
+  color: var(--blue);
+}
+
+.task-buttons > button:nth-child(1) {
+  border: red solid 2px;
+  color: red;
+}
+
+.task-buttons > button:hover {
+  background: var(--blue);
+  color: white;
+}
+
+.task-buttons > button:nth-child(1):hover {
+  background: red;
+  color: white;
 }
 
 @media (min-width: 650px) {
