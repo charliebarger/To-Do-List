@@ -9,6 +9,6 @@ addMenuEvent()
 callAddProjectListner()
 // window.onload = () => {
 getLocalStorageProject()
-addTaskListner()
+// addTaskListner()
 // updateFolders()
 // };
