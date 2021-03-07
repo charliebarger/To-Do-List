@@ -3,6 +3,7 @@ let taskPopUp = document.getElementById("task-form")
 let cancelButton = document.getElementById("cancel-button")
 let taskBackground = document.getElementById("child-wrapper")
 let hideSection = document.getElementById("task-section")
+let navBar = document.querySelector("nav")
 // hide-task-form
 
 export function addTaskButtonListner() {
@@ -14,9 +15,20 @@ export function addTaskButtonListner() {
 
     addButton.addEventListener('click', () => {
     cancelButton.addEventListener('click', () => {
-        taskPopUp.classList.add("hide-task-form")
-        taskBackground.classList.remove("blur-it")
-        hideSection.classList.remove("hide-content")
+        removePopUp()
+    })
+
+    navBar.addEventListener('click', () => {
+        if(!taskPopUp.classList.contains('hide-task-form')){
+            removePopUp()
+        }
     })
 })
 }
+
+function removePopUp(){
+    taskPopUp.classList.add("hide-task-form")
+    taskBackground.classList.remove("blur-it")
+    hideSection.classList.remove("hide-content")
+}
+    
