@@ -1,9 +1,14 @@
 let addButton = document.getElementById("add-task-button")
 let taskPopUp = document.getElementById("task-form")
 let cancelButton = document.getElementById("cancel-button")
+let submitButton = document.getElementById("submit-button")
 let taskBackground = document.getElementById("child-wrapper")
 let hideSection = document.getElementById("task-section")
 let navBar = document.querySelector("nav")
+let taskName = document.getElementById("task-name")
+let dueDate = document.getElementById("task-due-date")
+let priority = document.getElementById("task-priority")
+let description = document.getElementById("task-description")
 // hide-task-form
 
 export function addTaskButtonListner() {
@@ -16,6 +21,7 @@ export function addTaskButtonListner() {
     addButton.addEventListener('click', () => {
     cancelButton.addEventListener('click', () => {
         removePopUp()
+        clearForm()
     })
 
     navBar.addEventListener('click', () => {
@@ -23,6 +29,15 @@ export function addTaskButtonListner() {
             removePopUp()
         }
     })
+
+    taskPopUp.addEventListener('submit', function(e){
+        if (taskName.value){
+            clearForm()
+            e.preventDefault()
+            removePopUp()
+        }
+    })
+
 })
 }
 
@@ -31,4 +46,10 @@ function removePopUp(){
     taskBackground.classList.remove("blur-it")
     hideSection.classList.remove("hide-content")
 }
-    
+
+function clearForm() {
+    taskName.value = '';
+    dueDate.value = '';
+    priority.selectedIndex = 0;
+    description.value = '';
+}

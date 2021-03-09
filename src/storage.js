@@ -15,12 +15,12 @@ function setLocalStorageProject(project) {
     localStorage.setItem('Projects', JSON.stringify(folder))
 }
 
-function addStorageTasks(task) {
+function addStorageTasks(taskName, dueDate, priority, description) {
     let localFolder = getFolderAndTasks()
     let selectedFolder = getSelectedFolderName()
     for (let i = 0; i < localFolder.length; i++){
         if (localFolder[i].title == selectedFolder){
-            localFolder[i].tasks.push(task)
+            localFolder[i].tasks.push({"taskName": taskName, "dueDate": dueDate, "priority" : priority, "description": description})
             break
         }
     }
