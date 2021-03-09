@@ -1,5 +1,4 @@
 /******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./src/burgerMenu.js":
@@ -8,21 +7,24 @@
   \***************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "addMenuEvent": () => (/* binding */ addMenuEvent)
 /* harmony export */ });
 let burger = document.querySelector('.hamburger');
 let navBar = document.querySelector('nav');
+let hideBackground = document.getElementById('task-section')
 
 function toggleClassOnEvent(eventKey ,className, item = eventKey){
-  eventKey.addEventListener('click', ()  => {
+  eventKey.addEventListener('click', () => {
     item.classList.toggle(className)
 })
 }
 
 function addMenuEvent(){
     toggleClassOnEvent(burger, 'closed')
+    toggleClassOnEvent(burger, 'hide-content', hideBackground)
     toggleClassOnEvent(burger, 'active', navBar)
 }
 
@@ -36,6 +38,7 @@ function addMenuEvent(){
   \*********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "createSelectedFolder": () => (/* binding */ createSelectedFolder),
@@ -119,13 +122,17 @@ function createNotSelectedFolder(title) {
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _burgerMenu__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./burgerMenu */ "./src/burgerMenu.js");
 /* harmony import */ var _projectTextfield__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./projectTextfield */ "./src/projectTextfield.js");
 /* harmony import */ var _storage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./storage */ "./src/storage.js");
 /* harmony import */ var _taskTextfield__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./taskTextfield */ "./src/taskTextfield.js");
+/* harmony import */ var _taskTextfield__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_taskTextfield__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _popUpTaskForm__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./popUpTaskForm */ "./src/popUpTaskForm.js");
 
 // import {updateFolders} from "./Projectfolders"
+
 
 
 
@@ -135,9 +142,80 @@ __webpack_require__.r(__webpack_exports__);
 ;(0,_projectTextfield__WEBPACK_IMPORTED_MODULE_1__.callAddProjectListner)()
 // window.onload = () => {
 ;(0,_storage__WEBPACK_IMPORTED_MODULE_2__.getLocalStorageProject)()
-;(0,_taskTextfield__WEBPACK_IMPORTED_MODULE_3__.addTaskListner)()
+;(0,_popUpTaskForm__WEBPACK_IMPORTED_MODULE_4__.addTaskButtonListner)()
+// addTaskListner()
 // updateFolders()
 // };
+
+
+/***/ }),
+
+/***/ "./src/popUpTaskForm.js":
+/*!******************************!*\
+  !*** ./src/popUpTaskForm.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "addTaskButtonListner": () => (/* binding */ addTaskButtonListner)
+/* harmony export */ });
+let addButton = document.getElementById("add-task-button")
+let taskPopUp = document.getElementById("task-form")
+let cancelButton = document.getElementById("cancel-button")
+let submitButton = document.getElementById("submit-button")
+let taskBackground = document.getElementById("child-wrapper")
+let hideSection = document.getElementById("task-section")
+let navBar = document.querySelector("nav")
+let taskName = document.getElementById("task-name")
+let dueDate = document.getElementById("task-due-date")
+let priority = document.getElementById("task-priority")
+let description = document.getElementById("task-description")
+// hide-task-form
+
+function addTaskButtonListner() {
+    addButton.addEventListener('click', () => {
+    taskPopUp.classList.remove("hide-task-form")
+    taskBackground.classList.add("blur-it")
+    hideSection.classList.add("hide-content")
+})
+
+    addButton.addEventListener('click', () => {
+    cancelButton.addEventListener('click', () => {
+        removePopUp()
+        clearForm()
+    })
+
+    navBar.addEventListener('click', () => {
+        if(!taskPopUp.classList.contains('hide-task-form')){
+            removePopUp()
+        }
+    })
+
+    taskPopUp.addEventListener('submit', function(e){
+        if (taskName.value){
+            clearForm()
+            e.preventDefault()
+            removePopUp()
+        }
+    })
+
+})
+}
+
+function removePopUp(){
+    taskPopUp.classList.add("hide-task-form")
+    taskBackground.classList.remove("blur-it")
+    hideSection.classList.remove("hide-content")
+}
+
+function clearForm() {
+    taskName.value = '';
+    dueDate.value = '';
+    priority.selectedIndex = 0;
+    description.value = '';
+}
 
 
 /***/ }),
@@ -148,6 +226,7 @@ __webpack_require__.r(__webpack_exports__);
   \*************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "addClickListners": () => (/* binding */ addClickListners),
@@ -228,6 +307,7 @@ function updateProjectFoldersList() {
   \*********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "callAddProjectListner": () => (/* binding */ callAddProjectListner),
@@ -291,6 +371,7 @@ function clearInput(textField) {
   \***************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "selectFirstProject": () => (/* binding */ selectFirstProject),
@@ -347,6 +428,7 @@ function addTaskListner() {
   \************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "setLocalStorageProject": () => (/* binding */ setLocalStorageProject),
@@ -375,12 +457,12 @@ function setLocalStorageProject(project) {
     localStorage.setItem('Projects', JSON.stringify(folder))
 }
 
-function addStorageTasks(task) {
+function addStorageTasks(taskName, dueDate, priority, description) {
     let localFolder = getFolderAndTasks()
     let selectedFolder = (0,_selectTask__WEBPACK_IMPORTED_MODULE_1__.getSelectedFolderName)()
     for (let i = 0; i < localFolder.length; i++){
         if (localFolder[i].title == selectedFolder){
-            localFolder[i].tasks.push(task)
+            localFolder[i].tasks.push({"taskName": taskName, "dueDate": dueDate, "priority" : priority, "description": description})
             break
         }
     }
@@ -438,44 +520,38 @@ function removeFromStorage(titleName){
 /*!******************************!*\
   !*** ./src/taskTextfield.js ***!
   \******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (() => {
 
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "addTaskListner": () => (/* binding */ addTaskListner)
-/* harmony export */ });
-/* harmony import */ var _storage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./storage */ "./src/storage.js");
-/* harmony import */ var _projectTextfield__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./projectTextfield */ "./src/projectTextfield.js");
+// import {addStorageTasks, checkForTasksOfSameName} from "./storage"
+// import {validateFormIsNotBlank, resetTextfield, clearInput} from "./projectTextfield"
 
+// export function addTaskListner() {
+//     let task = document.getElementById('addTaskInput')
+//     let addButton = document.getElementById("addTaskButton")
+//     addButton.addEventListener('click', function(e){
+//         addInputedTask(e, task)
+//     })
+//     task.addEventListener('keydown', function(e){
+//         if(e.key == 'Enter'){
+//             addInputedTask(e, task)
+//         }
+//     })
+// }
 
-
-function addTaskListner() {
-    let task = document.getElementById('addTaskInput')
-    let addButton = document.getElementById("addTaskButton")
-    addButton.addEventListener('click', function(e){
-        addInputedTask(e, task)
-    })
-    task.addEventListener('keydown', function(e){
-        if(e.key == 'Enter'){
-            addInputedTask(e, task)
-        }
-    })
-}
-
-function addInputedTask(event, textField) {
-    if((0,_projectTextfield__WEBPACK_IMPORTED_MODULE_1__.validateFormIsNotBlank)(textField, _storage__WEBPACK_IMPORTED_MODULE_0__.checkForTasksOfSameName)){
-        (0,_storage__WEBPACK_IMPORTED_MODULE_0__.addStorageTasks)(textField.value)
-        ;(0,_projectTextfield__WEBPACK_IMPORTED_MODULE_1__.resetTextfield)(textField, event)
-    }
-    else if((0,_storage__WEBPACK_IMPORTED_MODULE_0__.checkForTasksOfSameName)(textField.value)){
-        (0,_projectTextfield__WEBPACK_IMPORTED_MODULE_1__.resetTextfield)(textField, event)
-        alert('This Task Already Exists')
-    }
-    else{
-        console.log('here')
-        ;(0,_projectTextfield__WEBPACK_IMPORTED_MODULE_1__.clearInput)(textField)
-    }
-}
+// function addInputedTask(event, textField) {
+//     if(validateFormIsNotBlank(textField, checkForTasksOfSameName)){
+//         addStorageTasks(textField.value)
+//         resetTextfield(textField, event)
+//     }
+//     else if(checkForTasksOfSameName(textField.value)){
+//         resetTextfield(textField, event)
+//         alert('This Task Already Exists')
+//     }
+//     else{
+//         console.log('here')
+//         clearInput(textField)
+//     }
+// }
 
 
 /***/ })
@@ -506,6 +582,18 @@ function addInputedTask(event, textField) {
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
