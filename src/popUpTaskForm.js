@@ -1,3 +1,6 @@
+import {addStorageTasks} from "./storage"
+import {createTask} from "./createNewTask"
+
 let addButton = document.getElementById("add-task-button")
 let taskPopUp = document.getElementById("task-form")
 let cancelButton = document.getElementById("cancel-button")
@@ -32,6 +35,8 @@ export function addTaskButtonListner() {
 
     taskPopUp.addEventListener('submit', function(e){
         if (taskName.value){
+            createTask(taskName.value, dueDate.value, priority.value, description.value)
+            addStorageTasks(taskName.value, dueDate.value, priority.value)
             clearForm()
             e.preventDefault()
             removePopUp()

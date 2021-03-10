@@ -39,7 +39,7 @@ function checkForFoldersOfSameName(newProject){
     console.log(projects)
     let check = false;
     for (let folder of projects){
-        check = folder.title.replaceAll(/\s/g,'') == newProject.replaceAll(/\s/g,'') ? true : false;
+        check = folder.title.replaceAll(/\s/g,'').toLowerCase() == newProject.replaceAll(/\s/g,'').toLowerCase() ? true : false;
         if (check == true){
             break
         }

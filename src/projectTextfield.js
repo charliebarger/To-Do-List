@@ -14,6 +14,8 @@ export function callAddProjectListner() {
     })
 }
 
+
+
 function addInputedProject(event, textField) {
     if(validateFormIsNotBlank(textField, checkForFoldersOfSameName)){
         setLocalStorageProject(textField.value)
@@ -21,8 +23,8 @@ function addInputedProject(event, textField) {
         resetTextfield(textField, event)
     }
     else if(checkForFoldersOfSameName(textField.value)){
-        resetTextfield()
         alert('This Project Folder Already Exists')
+        resetTextfield(textField, event)
     }
     else{
         clearInput(textField)
