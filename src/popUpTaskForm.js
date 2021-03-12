@@ -1,60 +1,86 @@
 import {addStorageTasks} from "./storage"
 import {createTask} from "./createNewTask"
 
-let addButton = document.getElementById("add-task-button")
 let taskPopUp = document.getElementById("task-form")
-let cancelButton = document.getElementById("cancel-button")
-let submitButton = document.getElementById("submit-button")
-let taskBackground = document.getElementById("child-wrapper")
-let hideSection = document.getElementById("task-section")
-let navBar = document.querySelector("nav")
-let taskName = document.getElementById("task-name")
-let dueDate = document.getElementById("task-due-date")
-let priority = document.getElementById("task-priority")
-let description = document.getElementById("task-description")
+
 // hide-task-form
 
 export function addTaskButtonListner() {
-    addButton.addEventListener('click', () => {
-    taskPopUp.classList.remove("hide-task-form")
-    taskBackground.classList.add("blur-it")
-    hideSection.classList.add("hide-content")
-})
-
-    addButton.addEventListener('click', () => {
-    cancelButton.addEventListener('click', () => {
-        removePopUp()
-        clearForm()
-    })
-
-    navBar.addEventListener('click', () => {
-        if(!taskPopUp.classList.contains('hide-task-form')){
-            removePopUp()
-        }
-    })
-
-    taskPopUp.addEventListener('submit', function(e){
-        if (taskName.value){
-            createTask(taskName.value, dueDate.value, priority.value, description.value)
-            addStorageTasks(taskName.value, dueDate.value, priority.value)
-            clearForm()
-            e.preventDefault()
-            removePopUp()
-        }
-    })
-
-})
+    openFormListner()
+    closeFormListners()
+    submitFormListner()
 }
 
-function removePopUp(){
-    taskPopUp.classList.add("hide-task-form")
-    taskBackground.classList.remove("blur-it")
-    hideSection.classList.remove("hide-content")
+function closeFormListners() {
+    let navBar = document.querySelector("nav")
+    let cancelButton = document.getElementById("cancel-button")
+    cancelButton.addEventListener('click', (e) => {
+        exitTaskForm(e)
+    })
+    navBar.addEventListener('click', (e) => {
+        if(!taskPopUp.classList.contains('hide-task-form')){
+            exitTaskForm(e)
+        }
+    })
+}
+
+function submitFormListner() {
+    taskPopUp.addEventListener('submit', function(e){
+        let tasks = getTaskInputs()
+        if (tasks.taskName.value){
+            addTasks()
+            exitTaskForm(e)
+        }
+    })
+}
+
+function openFormListner() {
+     let addButton = document.getElementById("add-task-button")
+     addButton.addEventListener('click', () => {
+        toggleTaskFormUI()
+    })
+}
+
+function getTaskValues(value) {
+    let tasks = getTaskInputs()
+    let keys = Object.keys(tasks)
+    keys.forEach(key => {
+        tasks[key] = tasks[key].value
+    })
+    return(tasks)
+}
+
+function addTasks(){
+    let tasks = getTaskValues()
+    createTask(tasks.taskName, tasks.dueDate, tasks.priority, tasks.description)
+    addStorageTasks(tasks.taskName, tasks.dueDate, tasks.priority, tasks.description)
+}
+
+function getTaskInputs(){
+    let taskName = document.getElementById("task-name")
+    let dueDate = document.getElementById("task-due-date")
+    let priority = document.getElementById("task-priority")
+    let description = document.getElementById("task-description")
+    return {taskName, dueDate, priority, description}   
+}
+
+function exitTaskForm(event) {
+    event.preventDefault()
+    toggleTaskFormUI()
+    clearForm()
+}
+
+function toggleTaskFormUI() {
+    taskPopUp.classList.toggle("hide-task-form")
+    document.getElementById("child-wrapper").classList.toggle("blur-it")
+    document.getElementById("task-section").classList.toggle("hide-content")
 }
 
 function clearForm() {
-    taskName.value = '';
-    dueDate.value = '';
-    priority.selectedIndex = 0;
-    description.value = '';
+    let tasks = getTaskInputs()
+    console.log(tasks.taskName)
+    tasks.taskName.value = '';
+    tasks.dueDate.value = '';
+    tasks.description.value = '';
+    tasks.priority.value = 0;
 }

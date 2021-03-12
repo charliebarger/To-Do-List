@@ -32,7 +32,7 @@ class NewTask{
         checkbox.style.border = `${this.formatPriority()} solid 2px`
         toggleClassOnEvent(checkbox, "checkbox-clicked")
         checkbox.addEventListener('click', () => {
-            checkbox.parentElement.querySelector("span:first-of-type").style.textDecoration = "line-through"
+            // checkbox.parentElement.parentElement.style.background = "white"
         })
         return checkbox
     }
