@@ -1,12 +1,14 @@
 import {format} from 'date-fns'
 import {toggleClassOnEvent} from "./burgerMenu.js"
+import {matchIndexNumbers} from "./storage"
 class NewTask{
-    constructor(taskName, dueDate, priority, description, number){
+    constructor(taskName, dueDate, priority, description, number, selected){
         this.taskName = taskName;
         this.dueDate = dueDate;
         this.priority = priority;
         this.description = description;
         this.number = number;
+        this.selected = selected
     }
 
     createWrapper() {
@@ -32,17 +34,22 @@ class NewTask{
     createCheckBox(){
         let checkbox = document.createElement('div')
         checkbox.classList.add("checkbox")
-        checkbox.style.border = `${this.formatPriority()} solid 2px`
+        checkbox.style.border = `${this.formatPriority(checkbox)} solid 2px`
         toggleClassOnEvent(checkbox, "checkbox-clicked")
         checkbox.addEventListener('click', () => {
+            console.log(matchIndexNumbers(checkbox.parentElement.parentElement.dataset.indexNumber))
             // checkbox.parentElement.parentElement.style.background = "white"
         })
         return checkbox
     }
 
-    formatPriority(){
+    formatPriority(checkbox){
         let priority = Number(this.priority)
         let color = priority < 3 ? (priority == 1 ? "green" : "yellow") : "red";
+        console.log(this.selected)
+        if(this.selected){
+            checkbox.classList.add("checkbox-clicked")
+        }
         return color
     }
 
@@ -91,8 +98,8 @@ class NewTask{
 
 }
 
-export function createTask(taskName, dueDate, priority, description, number){
-    let task = new NewTask(taskName, dueDate, priority, description, number)
+export function createTask(taskName, dueDate, priority, description, number, selected){
+    let task = new NewTask(taskName, dueDate, priority, description, number, selected)
     task.createWrapper()
 }
 

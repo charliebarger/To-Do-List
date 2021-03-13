@@ -84,5 +84,5 @@ function clearForm() {
     tasks.taskName.value = '';
     tasks.dueDate.value = '';
     tasks.description.value = '';
-    tasks.priority.value = 0;
+    tasks.priority.value = 1;
 }

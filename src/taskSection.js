@@ -1,4 +1,4 @@
-import {loadTasks} from "./storage"
+import {loadTasks, removeSelectedFromStorage} from "./storage"
 
 function getTaskWrapper() {
      return document.getElementById('task-wrapper')
@@ -40,4 +40,12 @@ function removeImage() {
         }
 }
 
-export {appendTasks, removeImage, appendPlaceHolder}
+function clearCompleted(params) {
+    let clearCompletedButton = document.querySelector("#child-wrapper > section.add-delete-section > div.clear-completed");
+    clearCompletedButton.addEventListener('click', () => {
+        removeSelectedFromStorage()
+        appendTasks()
+    })
+}
+
+export {appendTasks, removeImage, appendPlaceHolder, clearCompleted}
