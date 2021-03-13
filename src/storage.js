@@ -36,10 +36,22 @@ function loadTasks() {
     return true
 }
 
-function getSelectedFolder(params) {
-    let localFolder = getFolderAndTasks()
+function getSelectedStorageFolder(localFolder) {
     let selectedFolder = getSelectedFolderName()
+    for (let i = 0; i < localFolder.length; i++){
+        if (localFolder[i].title == selectedFolder){
+            return localFolder[i]
+        }
+    }
+}
 
+function appendLastStorageTask() {
+    let localFolder = getFolderAndTasks()
+    let folder = getSelectedStorageFolder(localFolder)
+    let lastItem = folder.tasks.slice(-1)[0]
+    console.log(lastItem)
+    console.log(lastItem.taskName)
+    createTask(lastItem.taskName, lastItem.dueDate, lastItem.priority, lastItem.description, lastItem.indexNumber)
 }
 
 function getNumber(folder) {
@@ -51,14 +63,10 @@ function getNumber(folder) {
 
 function addStorageTasks(taskName, dueDate, priority, description) {
     let localFolder = getFolderAndTasks()
-    let selectedFolder = getSelectedFolderName()
-    for (let i = 0; i < localFolder.length; i++){
-        if (localFolder[i].title == selectedFolder){
-            let number = getNumber(localFolder[i])
-            localFolder[i].tasks.push({"taskName": taskName, "dueDate": dueDate, "priority" : priority, "description": description, "indexNumber" : number })
-            break
-        }
-    }
+    let selectedFolder = getSelectedStorageFolder(localFolder)
+    console.log(selectedFolder)
+    let number = getNumber(selectedFolder)
+    selectedFolder.tasks.push({"taskName": taskName, "dueDate" : dueDate, "priority" : priority, "description": description, "indexNumber" : number })
     localStorage.setItem('Projects', JSON.stringify(localFolder))
 }
 
@@ -109,4 +117,4 @@ function removeFromStorage(titleName){
     localStorage.setItem('Projects', JSON.stringify(projects))
 }
 
-export {setLocalStorageProject, getLocalStorageProject, checkForFoldersOfSameName, removeFromStorage, addStorageTasks, checkForTasksOfSameName, loadTasks, getNumber}
+export {setLocalStorageProject, getLocalStorageProject, checkForFoldersOfSameName, removeFromStorage, addStorageTasks, checkForTasksOfSameName, loadTasks, getNumber, appendLastStorageTask}

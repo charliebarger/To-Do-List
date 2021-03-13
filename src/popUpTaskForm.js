@@ -1,4 +1,4 @@
-import {addStorageTasks} from "./storage"
+import {addStorageTasks, appendLastStorageTask} from "./storage"
 import {createTask} from "./createNewTask"
 import {removeImage} from "./taskSection"
 
@@ -54,8 +54,8 @@ function getTaskValues(value) {
 function addTasks(){
     removeImage()
     let tasks = getTaskValues()
-    createTask(tasks.taskName, tasks.dueDate, tasks.priority, tasks.description)
     addStorageTasks(tasks.taskName, tasks.dueDate, tasks.priority, tasks.description)
+    appendLastStorageTask()
 }
 
 function getTaskInputs(){
