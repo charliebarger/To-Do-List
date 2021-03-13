@@ -1,4 +1,5 @@
 import {addStorageTasks} from "./storage"
+import {appendTasks} from "./taskSection"
 
 function selectFirstProject() {
     let projects = document.querySelectorAll('.project-folder')
@@ -7,6 +8,7 @@ function selectFirstProject() {
         projects[0].lastElementChild.classList.add('show-x')
         appendProjectName(projects[0].firstChild.textContent)
     }
+    appendTasks()
 }
 
 function appendProjectName(projectName) {

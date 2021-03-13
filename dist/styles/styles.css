@@ -560,6 +560,10 @@ svg {
   display: none;
 }
 
+.center-it {
+  margin-bottom: auto;
+}
+
 @media (min-width: 650px) {
   nav {
     flex-basis: 250px;

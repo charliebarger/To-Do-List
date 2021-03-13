@@ -1,22 +1,25 @@
 import {format} from 'date-fns'
 import {toggleClassOnEvent} from "./burgerMenu.js"
 class NewTask{
-    constructor(taskName, dueDate, priority, description){
+    constructor(taskName, dueDate, priority, description, number){
         this.taskName = taskName;
         this.dueDate = dueDate;
         this.priority = priority;
         this.description = description;
+        this.number = number;
     }
 
     createWrapper() {
         let parent = document.getElementById("task-wrapper")
         let wrapper = document.createElement('div');
+        wrapper.dataset.indexNumber = this.number
         wrapper.classList.add('task')
         parent.appendChild(wrapper)
         let coreWrapper = this.createCoreWrapper()
         let description = this.createDescriptionWrapper()
         toggleClassOnEvent(coreWrapper, 'hide-it', description)
         wrapper.append(coreWrapper, description)
+
     }
 
     createCoreWrapper(){
@@ -88,8 +91,8 @@ class NewTask{
 
 }
 
-export function createTask(taskName, dueDate, priority, description){
-    let task = new NewTask(taskName, dueDate, priority, description)
+export function createTask(taskName, dueDate, priority, description, number){
+    let task = new NewTask(taskName, dueDate, priority, description, number)
     task.createWrapper()
 }
 

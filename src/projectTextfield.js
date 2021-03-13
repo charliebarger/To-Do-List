@@ -1,5 +1,6 @@
 import {createSelectedFolder} from "./createNewProject"
 import {setLocalStorageProject, checkForFoldersOfSameName} from "./storage"
+import{appendTasks} from "./taskSection"
 
 export function callAddProjectListner() {
     let project = document.getElementById('add-project')
@@ -21,6 +22,7 @@ function addInputedProject(event, textField) {
         setLocalStorageProject(textField.value)
         createSelectedFolder(textField.value)
         resetTextfield(textField, event)
+        appendTasks()
     }
     else if(checkForFoldersOfSameName(textField.value)){
         alert('This Project Folder Already Exists')

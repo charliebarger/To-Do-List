@@ -1,5 +1,6 @@
 import {removeFromStorage} from "./storage"
 import {selectFirstProject, appendProjectName} from "./selectTask"
+import {appendTasks} from "./taskSection"
 
 function addClickListners(item){
     addHoverEffect(item, 'hover-x', item.lastElementChild)
@@ -28,6 +29,7 @@ function renderSelectedClass(item) {
     removeSelection()
     item.classList.add('selected-project')
     item.lastElementChild.classList.add('show-x')
+    appendTasks()
 }
 
 //uses mouseover and mouseleave to create a hover effect. The mouseover can be on one element and effect another

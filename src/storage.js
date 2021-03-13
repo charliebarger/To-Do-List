@@ -1,5 +1,8 @@
 import {createSelectedFolder, createNotSelectedFolder} from "./createNewProject"
 import {getSelectedFolderName} from "./selectTask"
+import {createTask} from "./createNewTask"
+import {appendPlaceHolder} from "./taskSection"
+
 
 function getFolderAndTasks() {
     if(!localStorage.getItem('Projects')){
@@ -15,12 +18,44 @@ function setLocalStorageProject(project) {
     localStorage.setItem('Projects', JSON.stringify(folder))
 }
 
+function loadTasks() {
+    let selectedFolder = getSelectedFolderName();
+    let localFolder = getFolderAndTasks()
+     for (let i = 0; i < localFolder.length; i++){
+        if (localFolder[i].title == selectedFolder){
+            console.log(localFolder[i].tasks.length)
+            if (localFolder[i].tasks.length == 0){
+                console.log('hello der')
+                return false
+            }
+            localFolder[i].tasks.forEach(task => {
+                createTask(task.taskName, task.dueDate, task.priority, task.description, task.indexNumber)
+            });
+        }
+    }
+    return true
+}
+
+function getSelectedFolder(params) {
+    let localFolder = getFolderAndTasks()
+    let selectedFolder = getSelectedFolderName()
+
+}
+
+function getNumber(folder) {
+    console.log(folder)
+    let lastFolder = folder.tasks.slice(-1)[0]
+    let number = lastFolder ? lastFolder.indexNumber + 1 : 0;
+    return number
+}
+
 function addStorageTasks(taskName, dueDate, priority, description) {
     let localFolder = getFolderAndTasks()
     let selectedFolder = getSelectedFolderName()
     for (let i = 0; i < localFolder.length; i++){
         if (localFolder[i].title == selectedFolder){
-            localFolder[i].tasks.push({"taskName": taskName, "dueDate": dueDate, "priority" : priority, "description": description})
+            let number = getNumber(localFolder[i])
+            localFolder[i].tasks.push({"taskName": taskName, "dueDate": dueDate, "priority" : priority, "description": description, "indexNumber" : number })
             break
         }
     }
@@ -28,9 +63,13 @@ function addStorageTasks(taskName, dueDate, priority, description) {
 }
 
 function getLocalStorageProject() {
+    console.log(loadTasks())
     let parsedProjects = getFolderAndTasks()
     for (let i = 0; i < parsedProjects.length; i++){
         i == 0 ? createSelectedFolder(parsedProjects[i].title) : createNotSelectedFolder(parsedProjects[i].title)
+    }
+    if (!loadTasks()){
+        appendPlaceHolder()
     }
 }
 
@@ -70,4 +109,4 @@ function removeFromStorage(titleName){
     localStorage.setItem('Projects', JSON.stringify(projects))
 }
 
-export {setLocalStorageProject, getLocalStorageProject, checkForFoldersOfSameName, removeFromStorage, addStorageTasks, checkForTasksOfSameName}
+export {setLocalStorageProject, getLocalStorageProject, checkForFoldersOfSameName, removeFromStorage, addStorageTasks, checkForTasksOfSameName, loadTasks, getNumber}
