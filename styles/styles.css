@@ -488,7 +488,7 @@ svg {
 }
 
 .task-item {
-  height: 60px;
+  height: 30px;
   display: flex;
   align-items: center;
   padding: 10px 20px;
@@ -496,14 +496,18 @@ svg {
 }
 
 .task {
-  margin: 20px auto;
-  width: 90%;
-  border: var(--black) solid 2px;
-  border-radius: 10px;
+  /* border-left: 0px; */
+  /* border-right: 0px; */
+  margin: 5px auto;
+  width: 100%;
+  border: var(--blue) solid 1px;
+  /* border-radius: 10px; */
   font-size: 16px;
   font-weight: 300;
-  background: var(--light-blue);
+  background: #3d3d3d17;
   color: var(--black);
+  border-left: 0px;
+  border-right: 0px;
 }
 
 .task-item > input[type="checkbox"] {
@@ -513,6 +517,7 @@ svg {
 
 .task-item > span:nth-last-child(2) {
   margin-left: auto;
+  font-size: 14px;
 }
 
 .description {
@@ -526,7 +531,9 @@ svg {
 
 .edit-icon-wrapper {
   fill: black;
-  height: 50%;
+  height: 15px;
+  margin-top: auto;
+  /* margin-bottom: auto; */
   margin-left: 15px;
   position: relative;
   bottom: 2.5px;
