@@ -104,7 +104,7 @@ function addStorageTasks(taskName, dueDate, priority, description) {
 }
 
 function getLocalStorageProject() {
-    console.log(loadTasks())
+    loadTasks()
     let parsedProjects = getFolderAndTasks()
     for (let i = 0; i < parsedProjects.length; i++){
         i == 0 ? createSelectedFolder(parsedProjects[i].title) : createNotSelectedFolder(parsedProjects[i].title)
