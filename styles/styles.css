@@ -571,6 +571,10 @@ svg {
   margin-bottom: auto;
 }
 
+.opaque-it{
+  opacity: .6;
+}
+
 @media (min-width: 650px) {
   nav {
     flex-basis: 250px;
