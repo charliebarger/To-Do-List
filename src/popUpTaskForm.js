@@ -1,8 +1,10 @@
-import {addStorageTasks, appendLastStorageTask} from "./storage"
+import {addStorageTasks, appendLastStorageTask, getTaskValues as currentTaskvalues, loadTasks, ammendTaskValues} from "./storage"
 import {createTask} from "./createNewTask"
-import {removeImage} from "./taskSection"
+import {removeImage, removeTasks} from "./taskSection"
 
 let taskPopUp = document.getElementById("task-form")
+let editSwitch = false
+let index;
 
 // hide-task-form
 
@@ -28,18 +30,43 @@ function closeFormListners() {
 function submitFormListner() {
     taskPopUp.addEventListener('submit', function(e){
         let tasks = getTaskInputs()
-        if (tasks.taskName.value){
+        if (tasks.taskName.value && !editSwitch){
             addTasks()
-            exitTaskForm(e)
         }
+        else if (tasks.taskName.value && editSwitch){
+            ammendTaskValues(index, tasks.taskName.value, tasks.dueDate.value, tasks.priority.value, tasks.description.value)
+            removeTasks()
+            loadTasks()
+        }
+        exitTaskForm(e)
     })
+}
+
+function submitEditForm(params) {
+    
 }
 
 function openFormListner() {
      let addButton = document.getElementById("add-task-button")
      addButton.addEventListener('click', () => {
+        editSwitch = false
+        document.querySelector("#task-form > h4").textContent = "New Task"
         toggleTaskFormUI()
     })
+}
+
+function editDefaultValues(number) {
+    index = number
+    let textBox = getTaskInputs()
+    let selectedtask = currentTaskvalues(index);
+    console.log(selectedtask.taskName)
+    textBox.taskName.value = selectedtask.taskName
+    textBox.dueDate.value = selectedtask.dueDate
+    textBox.priority.value = selectedtask.priority
+    textBox.description.value = selectedtask.description
+    toggleTaskFormUI()
+    document.querySelector("#task-form > h4").textContent = "Edit Task"
+    editSwitch = true
 }
 
 function getTaskValues(value) {
@@ -86,3 +113,5 @@ function clearForm() {
     tasks.description.value = '';
     tasks.priority.value = 1;
 }
+
+export{editDefaultValues}

@@ -48,4 +48,4 @@ function clearCompleted(params) {
     })
 }
 
-export {appendTasks, removeImage, appendPlaceHolder, clearCompleted}
+export {appendTasks, removeImage, appendPlaceHolder, clearCompleted, removeTasks}
