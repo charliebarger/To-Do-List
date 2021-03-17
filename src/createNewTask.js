@@ -33,24 +33,18 @@ class NewTask{
     }
 
     createCheckBox(){
+        console.log('reached')
+        let dulled = false
         let checkbox = document.createElement('div')
         checkbox.classList.add("checkbox")
         checkbox.style.border = `${this.formatPriority(checkbox)} solid 2px`
         toggleClassOnEvent(checkbox, "checkbox-clicked")
-        toggleClassOnEvent(checkbox, "opaque-it",)
         checkbox.addEventListener('click', () => {
             matchIndexNumbers(checkbox.parentElement.parentElement.dataset.indexNumber)
-            let parent = checkbox.parentElement.parentElement
-            let spans = parent.querySelectorAll('*')
-            console.log(this.selected)
-            if (this.selected){
-                spans.forEach(span =>
-                    span.style.opacity = ".6")
-                }
-            else{
-                spans.forEach(span =>
-                    span.style.opacity = "1")
-            }
+            let parent = checkbox.parentElement.parentElement;
+            parent.style.opacity = ".5"
+            dulled = dulled == false ? true : false;
+            parent.style.opacity = dulled == false ? "1" : ".5";
         })
         return checkbox
     }

@@ -4,9 +4,13 @@ function getTaskWrapper() {
      return document.getElementById('task-wrapper')
 }
 
-function removeTasks() {
-    let parent = getTaskWrapper()
+function removeImageStyles(){
     document.querySelector("#child-wrapper > section.task-header.default-page").classList.remove('center-it')
+}
+
+function removeTasks() {
+    removeImageStyles()
+    let parent = getTaskWrapper()
     while(parent.firstChild){
         parent.firstChild.remove()
     }
