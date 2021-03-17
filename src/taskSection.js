@@ -1,50 +1,64 @@
 import {loadTasks, removeSelectedFromStorage} from "./storage"
 
+let taskHeader = document.querySelector("#child-wrapper > section.task-header.default-page")
+
+
 function getTaskWrapper() {
      return document.getElementById('task-wrapper')
 }
 
-function removeImageStyles(){
-    document.querySelector("#child-wrapper > section.task-header.default-page").classList.remove('center-it')
+//remove auto margin from the taskHeader (auto margin is used here to center placeholder image)
+function removeCenterImageClass(){
+    taskHeader.classList.remove('center-it')
 }
 
 function removeTasks() {
-    removeImageStyles()
+    removeCenterImageClass()
     let parent = getTaskWrapper()
     while(parent.firstChild){
         parent.firstChild.remove()
     }
 }
 
+//append tasks if loadTask is empty append the placeholder image//
 function appendTasks() {
     removeTasks()
-    console.log('hi')
-     if (!loadTasks()){
-         appendPlaceHolder()
-     }
+    if (!loadTasks()){
+        appendPlaceHolder()
+    }
 }
 
-function appendPlaceHolder() {
+function createPlaceHolderWrapper() {
     let parent = getTaskWrapper()
     let wrapper = document.createElement('div')
     wrapper.classList.add('task-holder-img-wrapper')
+    parent.appendChild(wrapper)
+    return wrapper
+}
+
+function createPlaceHolderImage() {
     let img = document.createElement('img')
     img.src = "./img/20944361.jpg"
+    return img
+}
+
+function appendPlaceHolder() {
+    let wrapper = createPlaceHolderWrapper();
+    let img = createPlaceHolderImage();
     wrapper.appendChild(img)
-    parent.appendChild(wrapper)
-    document.querySelector("#child-wrapper > section.task-header.default-page").classList.add('center-it')
+    taskHeader.classList.add('center-it')
 }
 
 function removeImage() {
-        console.log('')
-        let wrapper = document.querySelector("#task-wrapper > div.task-holder-img-wrapper")
-        if (wrapper){
-            wrapper.remove()
-            document.querySelector("#child-wrapper > section.task-header.default-page").classList.remove('center-it')
-        }
+    let wrapper = document.querySelector("#task-wrapper > div.task-holder-img-wrapper")
+    if (wrapper){
+        wrapper.remove()
+        removeCenterImageClass()
+    }
 }
 
-function clearCompleted(params) {
+//clear selected tasks from local storage and reload tasks on clear button click//
+function clearCompleted() {
     let clearCompletedButton = document.querySelector("#child-wrapper > section.add-delete-section > div.clear-completed");
     clearCompletedButton.addEventListener('click', () => {
         removeSelectedFromStorage()

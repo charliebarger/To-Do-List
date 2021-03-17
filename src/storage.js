@@ -3,7 +3,9 @@ import {getSelectedFolderName} from "./selectTask"
 import {createTask} from "./createNewTask"
 import {appendPlaceHolder} from "./taskSection"
 
+//Local Storage Projects
 
+//return formatted local storage tasks, if empty set a default  
 function getFolderAndTasks() {
     if(!localStorage.getItem('Projects')){
         localStorage.setItem('Projects',JSON.stringify([{"title": "Default", "tasks": []}]))
@@ -12,30 +14,18 @@ function getFolderAndTasks() {
     return folderTasks
 }
 
+function setLocalStorage(itemToSet) {
+    localStorage.setItem('Projects', JSON.stringify(itemToSet))
+}
+
 function setLocalStorageProject(project) {
     let folder = getFolderAndTasks()
     folder.push({"title": project, "tasks": []})
-    localStorage.setItem('Projects', JSON.stringify(folder))
+    setLocalStorage(folder)
 }
 
-function loadTasks() {
-    let selectedFolder = getSelectedFolderName();
-    let localFolder = getFolderAndTasks()
-     for (let i = 0; i < localFolder.length; i++){
-        if (localFolder[i].title == selectedFolder){
-            console.log(localFolder[i].tasks.length)
-            if (localFolder[i].tasks.length == 0){
-                return false
-            }
-            localFolder[i].tasks.forEach(task => {
-                createTask(task.taskName, task.dueDate, task.priority, task.description, task.indexNumber, task.selected)
-            });
-        }
-    }
-    return true
-}
-
-function getSelectedStorageFolder(localFolder) {
+//return the selected local Folder
+function getSelectedStorageFolder(localFolder = getFolderAndTasks()) {
     let selectedFolder = getSelectedFolderName()
     for (let i = 0; i < localFolder.length; i++){
         if (localFolder[i].title == selectedFolder){
@@ -43,6 +33,46 @@ function getSelectedStorageFolder(localFolder) {
         }
     }
 }
+
+//create Local storage projects, add selected if it is the first project
+function getLocalStorageProject() {
+    let parsedProjects = getFolderAndTasks()
+    for (let i = 0; i < parsedProjects.length; i++){
+        i == 0 ? createSelectedFolder(parsedProjects[i].title) : createNotSelectedFolder(parsedProjects[i].title)
+    }
+    if (!loadTasks()){
+        appendPlaceHolder()
+    }
+}
+
+//return true if project title already exists//
+function checkForFoldersOfSameName(newProject){
+    let projects = getFolderAndTasks()
+    let check = false;
+    for (let folder of projects){
+        check = folder.title.replaceAll(/\s/g,'').toLowerCase() == newProject.replaceAll(/\s/g,'').toLowerCase() ? true : false;
+        if (check == true){
+            break
+        }
+    }
+    return check
+}
+
+//Local Storage Tasks
+
+function loadTasks() {
+    let localFolder = getSelectedStorageFolder()
+
+            if (localFolder.tasks.length == 0){
+                return false
+            }
+            localFolder.tasks.forEach(task => {
+                createTask(task.taskName, task.dueDate, task.priority, task.description, task.indexNumber, task.selected)
+            });
+    return true
+}
+
+
 
 function findTaskIndex(number) {
     let localFolder = getFolderAndTasks()
@@ -133,30 +163,6 @@ function addStorageTasks(taskName, dueDate, priority, description) {
     let number = getNumber(selectedFolder)
     selectedFolder.tasks.push({"taskName": taskName, "dueDate" : dueDate, "priority" : priority, "description": description, "indexNumber" : number, "selected" : false})
     localStorage.setItem('Projects', JSON.stringify(localFolder))
-}
-
-function getLocalStorageProject() {
-    loadTasks()
-    let parsedProjects = getFolderAndTasks()
-    for (let i = 0; i < parsedProjects.length; i++){
-        i == 0 ? createSelectedFolder(parsedProjects[i].title) : createNotSelectedFolder(parsedProjects[i].title)
-    }
-    if (!loadTasks()){
-        appendPlaceHolder()
-    }
-}
-
-function checkForFoldersOfSameName(newProject){
-    let projects = getFolderAndTasks()
-    console.log(projects)
-    let check = false;
-    for (let folder of projects){
-        check = folder.title.replaceAll(/\s/g,'').toLowerCase() == newProject.replaceAll(/\s/g,'').toLowerCase() ? true : false;
-        if (check == true){
-            break
-        }
-    }
-    return check
 }
 
 function checkForTasksOfSameName(task) {
