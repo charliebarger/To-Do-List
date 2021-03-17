@@ -34,6 +34,10 @@ function getSelectedStorageFolder(localFolder = getFolderAndTasks()) {
     }
 }
 
+function setIt() {
+     localStorage.setItem('Projects', JSON.stringify(getFolderAndTasks()))
+}
+
 //create Local storage projects, add selected if it is the first project
 function getLocalStorageProject() {
     let parsedProjects = getFolderAndTasks()
@@ -62,24 +66,18 @@ function checkForFoldersOfSameName(newProject){
 
 function loadTasks() {
     let localFolder = getSelectedStorageFolder()
-
-            if (localFolder.tasks.length == 0){
-                return false
-            }
-            localFolder.tasks.forEach(task => {
-                createTask(task.taskName, task.dueDate, task.priority, task.description, task.indexNumber, task.selected)
-            });
+    if (localFolder.tasks.length == 0){
+        return false
+    }
+    localFolder.tasks.forEach(task => {
+        createTask(task.taskName, task.dueDate, task.priority, task.description, task.indexNumber, task.selected)
+    });
     return true
 }
 
-
-
 function findTaskIndex(number) {
-    let localFolder = getFolderAndTasks()
-    let folder = getSelectedStorageFolder(localFolder).tasks
-    console.log(folder)
+    let folder = getSelectedStorageFolder().tasks
     for (let i = 0; i < folder.length; i++){
-        console.log(folder[i])
         if(folder[i].indexNumber == Number(number)){
             return i
         }
@@ -87,11 +85,9 @@ function findTaskIndex(number) {
 }
 
 function getTaskValues(number) {
-    let localFolder = getFolderAndTasks()
-    let task = getSelectedStorageFolder(localFolder).tasks
+    let task = getSelectedStorageFolder().tasks
     let index = findTaskIndex(number)
     let currentTask = task[index]
-    console.log(currentTask)
     return currentTask
 }
 
@@ -104,8 +100,7 @@ function ammendTaskValues(number, taskName, dueDate, priority, description) {
     currentTask.dueDate = dueDate
     currentTask.priority = priority
     currentTask.description = description
-    localStorage.setItem('Projects', JSON.stringify(localFolder))
-    console.log(currentTask)
+    setLocalStorage(localFolder)
 }
 
 function matchIndexNumbers(number) {
@@ -113,44 +108,33 @@ function matchIndexNumbers(number) {
         let task = getSelectedStorageFolder(localFolder).tasks
         let index = findTaskIndex(number)
         let currentTask = task[index]
-        console.log(currentTask.selected)
         if(currentTask.selected == true){
             currentTask.selected = false
         }
         else{
             currentTask.selected = true
         }
-        console.log(currentTask.selected)
-        localStorage.setItem('Projects', JSON.stringify(localFolder))
-    }
+        setLocalStorage(localFolder)
+}
 
 function removeSelectedFromStorage(){
     let localFolder = getFolderAndTasks()
     let folder = getSelectedStorageFolder(localFolder).tasks
-    console.log(folder.length)
     for (let i = folder.length - 1; i > -1; i--){
-        console.log('fuck')
         if(folder[i].selected == true){
             folder.splice(i , 1)
         }
     }
-    localStorage.setItem('Projects', JSON.stringify(localFolder))
+    setLocalStorage(localFolder)
 }
 
-
-
-
 function appendLastStorageTask() {
-    let localFolder = getFolderAndTasks()
-    let folder = getSelectedStorageFolder(localFolder)
+    let folder = getSelectedStorageFolder()
     let lastItem = folder.tasks.slice(-1)[0]
-    console.log(lastItem)
-    console.log(lastItem.taskName)
     createTask(lastItem.taskName, lastItem.dueDate, lastItem.priority, lastItem.description, lastItem.indexNumber, lastItem.selected)
 }
 
 function getNumber(folder) {
-    console.log(folder)
     let lastFolder = folder.tasks.slice(-1)[0]
     let number = lastFolder ? lastFolder.indexNumber + 1 : 0;
     return number
@@ -159,10 +143,9 @@ function getNumber(folder) {
 function addStorageTasks(taskName, dueDate, priority, description) {
     let localFolder = getFolderAndTasks()
     let selectedFolder = getSelectedStorageFolder(localFolder)
-    console.log(selectedFolder)
     let number = getNumber(selectedFolder)
     selectedFolder.tasks.push({"taskName": taskName, "dueDate" : dueDate, "priority" : priority, "description": description, "indexNumber" : number, "selected" : false})
-    localStorage.setItem('Projects', JSON.stringify(localFolder))
+    setLocalStorage(localFolder)
 }
 
 function checkForTasksOfSameName(task) {
@@ -185,7 +168,7 @@ function removeFromStorage(titleName){
             projects.splice(index, 1)
         }
     }
-    localStorage.setItem('Projects', JSON.stringify(projects))
+    setLocalStorage(projects)
 }
 
 export {setLocalStorageProject, getLocalStorageProject, checkForFoldersOfSameName, removeFromStorage, addStorageTasks, checkForTasksOfSameName, loadTasks, getNumber, appendLastStorageTask, matchIndexNumbers, removeSelectedFromStorage, findTaskIndex, getTaskValues, ammendTaskValues }
