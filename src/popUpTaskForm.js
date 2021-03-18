@@ -47,7 +47,6 @@ function addTasks(){
 }
 
 function editTasks(tasks) {
-    console.log(index)
     ammendTaskValues(index, tasks.taskName.value, tasks.dueDate.value, tasks.priority.value, tasks.description.value)
     removeTasks()
     loadTasks()
@@ -67,7 +66,6 @@ function toggleTaskFormUI() {
 
 function clearForm() {
     let tasks = getTaskInputs()
-    console.log(tasks.taskName)
     tasks.taskName.value = '';
     tasks.dueDate.value = '';
     tasks.description.value = '';
@@ -116,6 +114,5 @@ function getTaskInputs(){
     let description = document.getElementById("task-description")
     return {taskName, dueDate, priority, description}   
 }
-
 
 export{addTaskButtonListner, editDefaultValues}

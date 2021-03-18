@@ -121,7 +121,7 @@ function ammendTaskValues(number, taskName, dueDate, priority, description) {
 }
 
 //switches task.selected from true to false and vica versa
-function matchIndexNumbers(number) {
+function switchSelectedValue(number) {
         let localFolder = getFolderAndTasks()
         let task = localFolder[getSelectedFolderIndex()].tasks[findTaskIndex(number)]
         task.selected = task.selected == true ? false : true;
@@ -149,7 +149,7 @@ function appendLastStorageTask() {
 
 
 //sets indexNumber
-function getNumber(folder) {
+function getIndexNumber(folder) {
     let lastFolder = folder.tasks.slice(-1)[0]
     let number = lastFolder ? lastFolder.indexNumber + 1 : 0;
     return number
@@ -158,21 +158,8 @@ function getNumber(folder) {
 function addStorageTasks(taskName, dueDate, priority, description) {
     let localFolder = getFolderAndTasks()
     let selectedFolder = localFolder[getSelectedFolderIndex()]
-    selectedFolder.tasks.push({"taskName": taskName, "dueDate" : dueDate, "priority" : priority, "description": description, "indexNumber" : getNumber(selectedFolder), "selected" : false})
+    selectedFolder.tasks.push({"taskName": taskName, "dueDate" : dueDate, "priority" : priority, "description": description, "indexNumber" : getIndexNumber(selectedFolder), "selected" : false})
     setLocalStorage(localFolder)
 }
 
-function checkForTasksOfSameName(task) {
-    let projects = getFolderAndTasks()
-    let selectedProject = getSelectedFolderName()
-    for (let folder of projects){
-        if (folder.title == selectedProject){
-            if(folder.tasks.includes(task)){
-                return true
-            }
-        }
-    }
-    return false
-}
-
-export {setLocalStorageProject, getLocalStorageProject, checkForFoldersOfSameName, removeFromStorage, addStorageTasks, checkForTasksOfSameName, loadTasks, getNumber, appendLastStorageTask, matchIndexNumbers, removeSelectedTasksFromStorage, findTaskIndex, getTaskValues, ammendTaskValues }
+export {setLocalStorageProject, getLocalStorageProject, checkForFoldersOfSameName, removeFromStorage, addStorageTasks, loadTasks, appendLastStorageTask, switchSelectedValue, removeSelectedTasksFromStorage, getTaskValues, ammendTaskValues }

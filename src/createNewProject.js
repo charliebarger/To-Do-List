@@ -50,7 +50,6 @@ class selectedProject extends newProject{
     
 }
 
-
 function createSelectedFolder(title) {
     let selectedFolder = new selectedProject(title)
     selectedFolder.addSelection()

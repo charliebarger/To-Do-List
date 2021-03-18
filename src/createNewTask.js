@@ -1,7 +1,8 @@
 import {format} from 'date-fns'
 import {toggleClassOnEvent} from "./burgerMenu.js"
-import {matchIndexNumbers} from "./storage"
+import {switchSelectedValue} from "./storage"
 import {editDefaultValues} from "./popUpTaskForm"
+
 class NewTask{
     constructor(taskName, dueDate, priority, description, number, selected){
         this.taskName = taskName;
@@ -22,7 +23,9 @@ class NewTask{
         let description = this.createDescriptionWrapper()
         toggleClassOnEvent(coreWrapper, 'hide-it', description)
         wrapper.append(coreWrapper, description)
-
+        if (this.selected){
+            wrapper.style.opacity = ".5"
+        }
     }
 
     createCoreWrapper(){
@@ -33,14 +36,13 @@ class NewTask{
     }
 
     createCheckBox(){
-        console.log('reached')
-        let dulled = false
+        let dulled = this.selected
         let checkbox = document.createElement('div')
         checkbox.classList.add("checkbox")
         checkbox.style.border = `${this.formatPriority(checkbox)} solid 2px`
         toggleClassOnEvent(checkbox, "checkbox-clicked")
         checkbox.addEventListener('click', () => {
-            matchIndexNumbers(checkbox.parentElement.parentElement.dataset.indexNumber)
+            switchSelectedValue(checkbox.parentElement.parentElement.dataset.indexNumber)
             let parent = checkbox.parentElement.parentElement;
             parent.style.opacity = ".5"
             dulled = dulled == false ? true : false;
@@ -50,9 +52,7 @@ class NewTask{
     }
 
     formatPriority(checkbox){
-        let priority = Number(this.priority)
-        let color = priority < 3 ? (priority == 1 ? "green" : "yellow") : "red";
-        console.log(this.selected)
+        let color = this.priority < 3 ? (this.priority == 1 ? "green" : "yellow") : "red";
         if(this.selected){
             checkbox.classList.add("checkbox-clicked")
         }
@@ -85,10 +85,11 @@ class NewTask{
     }
 
     svgEvent(icon) {
-    icon.addEventListener('click', () => {
-        editDefaultValues(this.number)
-    })
-}
+        icon.addEventListener('click', (e) => {
+            e.stopPropagation()
+            editDefaultValues(this.number)
+        })
+    }
 
     createDescriptionWrapper(){
         let wrapper = document.createElement('div')
@@ -99,13 +100,8 @@ class NewTask{
 
     createDescription(){
         let description = document.createElement('p')
-        if (this.description){
-            description.textContent = `Comments: ${this.description}`
-            return description
-        }
-        else {
-            description.textContent = `No Comments`
-        }
+        let text = this.description ? `Comments: ${this.description}`: `No Comments`;
+        description.textContent = text
         return description
     }
 }
