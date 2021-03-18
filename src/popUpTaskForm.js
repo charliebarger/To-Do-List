@@ -1,19 +1,17 @@
 import {addStorageTasks, appendLastStorageTask, getTaskValues as currentTaskvalues, loadTasks, ammendTaskValues} from "./storage"
-import {createTask} from "./createNewTask"
 import {removeImage, removeTasks} from "./taskSection"
 
 let taskPopUp = document.getElementById("task-form")
 let editSwitch = false
 let index;
 
-// hide-task-form
-
-export function addTaskButtonListner() {
+function addTaskButtonListner() {
     openFormListner()
     closeFormListners()
     submitFormListner()
 }
 
+//if cancel button or anywhere on the project nav bar is clicked exit the form
 function closeFormListners() {
     let navBar = document.querySelector("nav")
     let cancelButton = document.getElementById("cancel-button")
@@ -27,6 +25,7 @@ function closeFormListners() {
     })
 }
 
+//submit either a new task or edit an old one
 function submitFormListner() {
     taskPopUp.addEventListener('submit', function(e){
         let tasks = getTaskInputs()
@@ -34,48 +33,10 @@ function submitFormListner() {
             addTasks()
         }
         else if (tasks.taskName.value && editSwitch){
-            ammendTaskValues(index, tasks.taskName.value, tasks.dueDate.value, tasks.priority.value, tasks.description.value)
-            removeTasks()
-            loadTasks()
+            editTasks(tasks)
         }
         exitTaskForm(e)
     })
-}
-
-function submitEditForm(params) {
-    
-}
-
-function openFormListner() {
-     let addButton = document.getElementById("add-task-button")
-     addButton.addEventListener('click', () => {
-        editSwitch = false
-        document.querySelector("#task-form > h4").textContent = "New Task"
-        toggleTaskFormUI()
-    })
-}
-
-function editDefaultValues(number) {
-    index = number
-    let textBox = getTaskInputs()
-    let selectedtask = currentTaskvalues(index);
-    console.log(selectedtask.taskName)
-    textBox.taskName.value = selectedtask.taskName
-    textBox.dueDate.value = selectedtask.dueDate
-    textBox.priority.value = selectedtask.priority
-    textBox.description.value = selectedtask.description
-    toggleTaskFormUI()
-    document.querySelector("#task-form > h4").textContent = "Edit Task"
-    editSwitch = true
-}
-
-function getTaskValues(value) {
-    let tasks = getTaskInputs()
-    let keys = Object.keys(tasks)
-    keys.forEach(key => {
-        tasks[key] = tasks[key].value
-    })
-    return(tasks)
 }
 
 function addTasks(){
@@ -85,12 +46,11 @@ function addTasks(){
     appendLastStorageTask()
 }
 
-function getTaskInputs(){
-    let taskName = document.getElementById("task-name")
-    let dueDate = document.getElementById("task-due-date")
-    let priority = document.getElementById("task-priority")
-    let description = document.getElementById("task-description")
-    return {taskName, dueDate, priority, description}   
+function editTasks(tasks) {
+    console.log(index)
+    ammendTaskValues(index, tasks.taskName.value, tasks.dueDate.value, tasks.priority.value, tasks.description.value)
+    removeTasks()
+    loadTasks()
 }
 
 function exitTaskForm(event) {
@@ -114,4 +74,48 @@ function clearForm() {
     tasks.priority.value = 1;
 }
 
-export{editDefaultValues}
+//opens New Task Form on click of Add Button (bottom left of task section)
+function openFormListner() {
+     let addButton = document.getElementById("add-task-button")
+     addButton.addEventListener('click', () => {
+        editSwitch = false
+        document.querySelector("#task-form > h4").textContent = "New Task"
+        toggleTaskFormUI()
+    })
+}
+
+//opens taskForm and places values of task that are being edited as values in the textfield.
+//changes header from "New Project" to "Edit Project"
+function editDefaultValues(number) {
+    index = number
+    let textBox = getTaskInputs()
+    let selectedtask = currentTaskvalues(index);
+    textBox.taskName.value = selectedtask.taskName
+    textBox.dueDate.value = selectedtask.dueDate
+    textBox.priority.value = selectedtask.priority
+    textBox.description.value = selectedtask.description
+    toggleTaskFormUI()
+    document.querySelector("#task-form > h4").textContent = "Edit Task"
+    editSwitch = true
+}
+
+//loops through getTaskinputs and changes the value to th textfield value
+function getTaskValues() {
+    let tasks = getTaskInputs()
+    let keys = Object.keys(tasks)
+    keys.forEach(key => {
+        tasks[key] = tasks[key].value
+    })
+    return(tasks)
+}
+
+function getTaskInputs(){
+    let taskName = document.getElementById("task-name")
+    let dueDate = document.getElementById("task-due-date")
+    let priority = document.getElementById("task-priority")
+    let description = document.getElementById("task-description")
+    return {taskName, dueDate, priority, description}   
+}
+
+
+export{addTaskButtonListner, editDefaultValues}
