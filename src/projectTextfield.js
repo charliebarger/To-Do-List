@@ -2,27 +2,24 @@ import {createSelectedFolder} from "./createNewProject"
 import {setLocalStorageProject, checkForFoldersOfSameName} from "./storage"
 import{appendTasks} from "./taskSection"
 
+//attempts to pass validation and create project on Enter or click of Add Button
 export function callAddProjectListner() {
     let project = document.getElementById('add-project')
     let addButton = document.getElementById("add-project-button")
     addButton.addEventListener('click', function(e){
-        addInputedProject(e, project)
+        validateProjectForm(e, project)
     })
     project.addEventListener('keydown', function(e){
         if(e.key == 'Enter'){
-            addInputedProject(e, project)
+            validateProjectForm(e, project)
         }
     })
 }
 
-
-
-function addInputedProject(event, textField) {
+//checks that input is not blank and project name doesnt already exist, if not the project is added
+function validateProjectForm(event, textField) {
     if(validateFormIsNotBlank(textField, checkForFoldersOfSameName)){
-        setLocalStorageProject(textField.value)
-        createSelectedFolder(textField.value)
-        resetTextfield(textField, event)
-        appendTasks()
+        addProject(textField, event)
     }
     else if(checkForFoldersOfSameName(textField.value)){
         alert('This Project Folder Already Exists')
@@ -31,6 +28,13 @@ function addInputedProject(event, textField) {
     else{
         clearInput(textField)
     }
+}
+
+function addProject(textField, event) {
+    setLocalStorageProject(textField.value)
+    createSelectedFolder(textField.value)
+    resetTextfield(textField, event)
+    appendTasks()
 }
 
 function validateFormIsNotBlank(textField, validationFunction){
@@ -45,5 +49,3 @@ function resetTextfield(textField, event) {
 function clearInput(textField) {
     textField.value = '';
 }
-
-export {validateFormIsNotBlank, resetTextfield, clearInput}

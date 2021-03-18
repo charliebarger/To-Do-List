@@ -1,7 +1,8 @@
 import {removeFromStorage} from "./storage"
-import {selectFirstProject, appendProjectName} from "./selectTask"
+import {selectFirstProject, appendProjectName} from "./selectedProject"
 import {appendTasks} from "./taskSection"
 
+//appends prokect name to top left of task form and renders is as selected
 function addClickListners(item){
     addHoverEffect(item, 'hover-x', item.lastElementChild)
     item.addEventListener('click', () => {

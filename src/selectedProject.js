@@ -1,4 +1,3 @@
-import {addStorageTasks} from "./storage"
 import {appendTasks} from "./taskSection"
 
 function selectFirstProject() {
@@ -11,6 +10,7 @@ function selectFirstProject() {
     appendTasks()
 }
 
+//appends project name to top left of task section
 function appendProjectName(projectName) {
     let taskNameWrapper = document.getElementById('selected-task')
     taskNameWrapper.textContent = projectName
@@ -25,17 +25,4 @@ function getSelectedFolderName() {
 }
 }
 
-function addTaskListner() {
-    let newTask = document.getElementById('addTaskForm')
-    newTask.addEventListener('submit', (e) => {
-        e.preventDefault()
-        let taskValue = document.getElementById('addTaskInput').value
-        console.log(taskValue)
-        if (taskValue){
-            addStorageTasks(getSelectedFolderName(), taskValue)
-        }
-    })
-}
-
-
-export {selectFirstProject, appendProjectName, addTaskListner, getSelectedFolderName}
+export {selectFirstProject, appendProjectName, getSelectedFolderName}

@@ -1,4 +1,4 @@
-import {appendProjectName} from "./selectTask"
+import {appendProjectName} from "./selectedProject"
 import {addClickListners, removeSelection, deleteButtonListner} from "./projectEventListners"
 
 class newProject{
