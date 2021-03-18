@@ -24,55 +24,54 @@
         <nav>
             <div class="project-header">
                 <svg class="icon" viewBox="0 0 60 60" preserveAspectRatio="xMidYMid meet">
-                    <path d = "M57.49,21.5H54v-6.268c0-1.507-1.226-2.732-2.732-2.732H26.515l-5-7H2.732C1.226,5.5,0,6.726,0,8.232v43.687l0.006,0
-	c-0.005,0.563,0.17,1.114,0.522,1.575C1.018,54.134,1.76,54.5,2.565,54.5h44.759c1.156,0,2.174-0.779,2.45-1.813L60,24.649v-0.177
-	C60,22.75,58.944,21.5,57.49,21.5z M2,8.232C2,7.828,2.329,7.5,2.732,7.5h17.753l5,7h25.782c0.404,0,0.732,0.328,0.732,0.732V21.5
-	H12.731c-0.144,0-0.287,0.012-0.426,0.036c-0.973,0.163-1.782,0.873-2.023,1.776L2,45.899V8.232z M47.869,52.083
-	c-0.066,0.245-0.291,0.417-0.545,0.417H2.565c-0.243,0-0.385-0.139-0.448-0.222c-0.063-0.082-0.16-0.256-0.123-0.408l10.191-27.953
-	c0.066-0.245,0.291-0.417,0.545-0.417H54h3.49c0.38,0,0.477,0.546,0.502,0.819L47.869,52.083z" ></path>
+                <path d = "M57.49,21.5H54v-6.268c0-1.507-1.226-2.732-2.732-2.732H26.515l-5-7H2.732C1.226,5.5,0,6.726,0,8.232v43.687l0.006,0
+	            c-0.005,0.563,0.17,1.114,0.522,1.575C1.018,54.134,1.76,54.5,2.565,54.5h44.759c1.156,0,2.174-0.779,2.45-1.813L60,24.649v-0.177
+	            C60,22.75,58.944,21.5,57.49,21.5z M2,8.232C2,7.828,2.329,7.5,2.732,7.5h17.753l5,7h25.782c0.404,0,0.732,0.328,0.732,0.732V21.5
+	            H12.731c-0.144,0-0.287,0.012-0.426,0.036c-0.973,0.163-1.782,0.873-2.023,1.776L2,45.899V8.232z M47.869,52.083
+	            c-0.066,0.245-0.291,0.417-0.545,0.417H2.565c-0.243,0-0.385-0.139-0.448-0.222c-0.063-0.082-0.16-0.256-0.123-0.408l10.191-27.953
+	            c0.066-0.245,0.291-0.417,0.545-0.417H54h3.49c0.38,0,0.477,0.546,0.502,0.819L47.869,52.083z" ></path>
                 </svg>
                 <h2>Projects</h2>
             </div>
-        <ul class="project-list" id="project-parent"></ul>
+            <ul class="project-list" id="project-parent"></ul>
             <form class="list-wrapper add-new-project" id="new-project">
                 <input type="text" name="" id="add-project" required placeholder="Add Project" autocomplete="off" maxlength="40">
                 <button class='delete-icon add-icon' id="add-project-button"class="button1" type="submit" id="submitIt" value=""></button>
             </form>
         </nav>
         <section id="task-section" class="task-section">
-        <div class="child-wrapper" id="child-wrapper">
-            <section class="task-header default-page">
-                <div class="img-wrapper">
-                    <img src="./img/iconmonstr-check-mark-6.svg" alt="">
-                </div>
-                <h2 id= "selected-task"></h2>
-                <!-- <span id = "tasks-left" class="right-span">0 tasks remaining</span> -->
-            </section>
-            <section id="task-wrapper" class="task-wrapper">
-            </section>
-            <div>
-            </div>
-            <section class="add-delete-section">
-                <div class="add-task" id="add-task-button">
-                    <div class="add-task-wrapper"></div>
-                </div>
-                <div class="clear-completed"><span>Clear Completed Tasks</span>
-                <div class="trash-wrap"><svg class="trash-svg" id="Layer_1" viewBox="0 0 512 512" 
-                    xmlns="http://www.w3.org/2000/svg">
-                    <g>
-                        <path
+            <div class="child-wrapper" id="child-wrapper">
+                <section class="task-header default-page">
+                    <div class="img-wrapper">
+                        <img src="./img/iconmonstr-check-mark-6.svg" alt="">
+                    </div>
+                    <h2 id= "selected-task"></h2>
+                </section>
+                <section id="task-wrapper" class="task-wrapper"></section>
+                <div></div>
+                <section class="add-delete-section">
+                    <div class="add-task" id="add-task-button">
+                        <div class="add-task-wrapper"></div>
+                    </div>
+                    <div class="clear-completed"><span>Clear Completed Tasks</span>
+                        <div class="trash-wrap">
+                            <svg class="trash-svg" id="Layer_1" viewBox="0 0 512 512" 
+                            xmlns="http://www.w3.org/2000/svg">
+                            <g>
+                            <path
                             d="m424 64h-88v-16c0-26.467-21.533-48-48-48h-64c-26.467 0-48 21.533-48 48v16h-88c-22.056 0-40 17.944-40 40v56c0 8.836 7.164 16 16 16h8.744l13.823 290.283c1.221 25.636 22.281 45.717 47.945 45.717h242.976c25.665 0 46.725-20.081 47.945-45.717l13.823-290.283h8.744c8.836 0 16-7.164 16-16v-56c0-22.056-17.944-40-40-40zm-216-16c0-8.822 7.178-16 16-16h64c8.822 0 16 7.178 16 16v16h-96zm-128 56c0-4.411 3.589-8 8-8h336c4.411 0 8 3.589 8 8v40c-4.931 0-331.567 0-352 0zm313.469 360.761c-.407 8.545-7.427 15.239-15.981 15.239h-242.976c-8.555 0-15.575-6.694-15.981-15.239l-13.751-288.761h302.44z" />
-                        <path
+                            <path
                             d="m256 448c8.836 0 16-7.164 16-16v-208c0-8.836-7.164-16-16-16s-16 7.164-16 16v208c0 8.836 7.163 16 16 16z" />
-                        <path
+                            <path
                             d="m336 448c8.836 0 16-7.164 16-16v-208c0-8.836-7.164-16-16-16s-16 7.164-16 16v208c0 8.836 7.163 16 16 16z" />
-                        <path
+                            <path
                             d="m176 448c8.836 0 16-7.164 16-16v-208c0-8.836-7.164-16-16-16s-16 7.164-16 16v208c0 8.836 7.163 16 16 16z" />
-                    </g>
-                </svg></div>
-                </div>
-                </div>
-                
+                            </g>
+                            </svg>
+                        </div>
+                    </div>
+                </section>
+            </div>
                 <form action="#" class="addTaskForm hide-task-form" id="task-form">
                     <h4>New Task</h4>
                     <div>
@@ -100,11 +99,6 @@
                         <button type="submit" id="submit-button">Submit</button>
                     </div>
                 </form>
-            </section>
-            <!-- <form action="" id="addTaskForm">
-                <input type="text" name="" id="addTaskInput" required>
-                <button type="submit" id="addTaskButton">Submit</button>
-            </form> -->
         </section>
     </main>
 </body>

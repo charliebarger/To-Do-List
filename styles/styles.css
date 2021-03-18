@@ -124,10 +124,6 @@ h2 {
   color: var(--blue);
 }
 
-/* .project-list {
-  margin-left: 70px;
-} */
-
 .list-wrapper {
   cursor: pointer;
   margin: 10px 20px;
@@ -286,10 +282,6 @@ ul li {
   align-items: center;
   margin-bottom: 12px;
 }
-
-/* .default-page {
-  margin-bottom: auto;
-} */
 
 .right-span {
   margin-left: auto;
@@ -496,12 +488,9 @@ svg {
 }
 
 .task {
-  /* border-left: 0px; */
-  /* border-right: 0px; */
   margin: 5px auto;
   width: 100%;
   border: var(--blue) solid 1px;
-  /* border-radius: 10px; */
   font-size: 16px;
   font-weight: 300;
   background: #3d3d3d17;
@@ -533,7 +522,6 @@ svg {
   fill: black;
   height: 15px;
   margin-top: auto;
-  /* margin-bottom: auto; */
   margin-left: 15px;
   position: relative;
   bottom: 2.5px;
