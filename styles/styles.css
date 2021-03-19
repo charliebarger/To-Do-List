@@ -338,7 +338,7 @@ ul li {
 .add-delete-section {
   display: flex;
   align-items: center;
-  margin-top: auto;
+  margin-top: 12px;
 }
 
 .clear-completed {
@@ -599,6 +599,10 @@ svg {
   margin-bottom: 50px;
   border: var(--blue) solid 1px;
   border-radius: 10px;
+}
+
+.min-margin-wrapper {
+  margin-top: auto;
 }
 
 @media (min-width: 710px) {
