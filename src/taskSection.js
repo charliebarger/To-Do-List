@@ -58,7 +58,7 @@ function removeImage() {
 
 //clear selected tasks from local storage and reload tasks on clear button click//
 function clearCompleted() {
-    let clearCompletedButton = document.querySelector("#child-wrapper > section.add-delete-section > div.clear-completed");
+    let clearCompletedButton = document.querySelector("#child-wrapper > div.min-margin-wrapper > section > div.clear-completed");
     clearCompletedButton.addEventListener('click', () => {
         removeSelectedTasksFromStorage()
         appendTasks()

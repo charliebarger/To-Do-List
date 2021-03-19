@@ -9,7 +9,7 @@ import { parse } from "date-fns"
 //return formatted local storage tasks, if empty set a default  
 function getFolderAndTasks() {
     if(!localStorage.getItem('Projects')){
-        localStorage.setItem('Projects',JSON.stringify([{"title": "Default", "tasks": []}]))
+        localStorage.setItem('Projects',JSON.stringify([{"title": "Chores", "tasks": [{"taskName": "Click Me!", "dueDate" : '', "priority" : 3, "description": "Thanks for checking out my To-Do list! Click the Task Item to see it's description.", "indexNumber" : 1, "selected" : false},{"taskName": "Wash Dishes", "dueDate" : '2021-06-17', "priority" : 1, "description": "Do the Dishes!!!", "indexNumber" : 1, "selected" : false},{"taskName": "Mop Floor", "dueDate" : '2021-06-19', "priority" : 2, "description": "Go Get PineSol", "indexNumber" : 2, "selected" : false},{"taskName": "Take Out Trash", "dueDate" : '2021-03-17', "priority" : 3, "description": "", "indexNumber" : 3, "selected" : true}, {"taskName": "Do Laundry", "dueDate" : '', "priority" : 1, "description": "", "indexNumber" : 4, "selected" : false}, {"taskName": "Clean Bathroom", "dueDate" : '2021-04-17', "priority" : 2, "description": "Clean Toilet and Shower", "indexNumber" : 5, "selected" : false}, {"taskName": "Dusting", "dueDate" : '2021-03-20', "priority" : 2, "description": "Get To Dustin", "indexNumber" : 6, "selected" : true}, {"taskName": "Meal Prep", "dueDate" : '2021-04-21', "priority" : 3, "description": "Make chicken and salad for the work weak", "indexNumber" : 7, "selected" : false}]}, ]))
     }
     let folderTasks = JSON.parse(localStorage.getItem('Projects'))
     return folderTasks
