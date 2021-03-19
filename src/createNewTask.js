@@ -68,7 +68,7 @@ class NewTask{
     createDueDate(){
         let date = document.createElement('span')
         if (this.dueDate){
-            let selectedDate =  new Date(this.dueDate.replace(/-/g, ","))
+            let selectedDate =  new Date(this.dueDate)
             let formattedDate = format(selectedDate, 'MMMM dd, yyyy')
             date.textContent = formattedDate
         }
