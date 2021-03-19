@@ -31,10 +31,21 @@ function validateProjectForm(event, textField) {
 }
 
 function addProject(textField, event) {
+    checkForProjectWarning()
     setLocalStorageProject(textField.value)
     createSelectedFolder(textField.value)
     resetTextfield(textField, event)
     appendTasks()
+}
+
+function checkForProjectWarning() {
+    let blocker = document.querySelector(".no-project")
+    let blurred = document.getElementById("child-wrapper")
+    if (blocker){
+        blurred.classList.remove("light-blur")
+        blocker.remove()
+    }
+
 }
 
 function validateFormIsNotBlank(textField, validationFunction){

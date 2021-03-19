@@ -1,4 +1,4 @@
-import {appendTasks} from "./taskSection"
+import {appendTasks, removeTasks} from "./taskSection"
 
 function selectFirstProject() {
     let projects = document.querySelectorAll('.project-folder')
@@ -6,9 +6,29 @@ function selectFirstProject() {
         projects[0].classList.add("selected-project")
         projects[0].lastElementChild.classList.add('show-x')
         appendProjectName(projects[0].firstChild.textContent)
+        appendTasks()
     }
-    appendTasks()
+    else{
+        createNoProjectAlert()
+    }
 }
+
+function createNoProjectAlert() {
+    removeTasks()
+    let blurred = document.getElementById("child-wrapper")
+    blurred.classList.add("light-blur")
+    let parent = document.getElementById("task-section");
+    let popUpWarning = document.createElement('div')
+    popUpWarning.classList.add("no-project")
+    let warning = document.createElement('span')
+    warning.classList.add("project-warning")
+    warning.textContent = "Please Create A Project"
+    popUpWarning.appendChild(warning)
+    parent.appendChild(popUpWarning)
+}
+
+
+
 
 //appends project name to top left of task section
 function appendProjectName(projectName) {
@@ -25,4 +45,4 @@ function getSelectedFolderName() {
 }
 }
 
-export {selectFirstProject, appendProjectName, getSelectedFolderName}
+export {selectFirstProject, appendProjectName, getSelectedFolderName, createNoProjectAlert}

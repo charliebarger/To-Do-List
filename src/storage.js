@@ -1,7 +1,8 @@
 import {createSelectedFolder, createNotSelectedFolder} from "./createNewProject"
-import {getSelectedFolderName} from "./selectedProject"
+import {getSelectedFolderName, createNoProjectAlert} from "./selectedProject"
 import {createTask} from "./createNewTask"
 import {appendPlaceHolder} from "./taskSection"
+import { parse } from "date-fns"
 
 //Local Storage Projects
 
@@ -51,8 +52,13 @@ function getLocalStorageProject() {
     for (let i = 0; i < parsedProjects.length; i++){
         i == 0 ? createSelectedFolder(parsedProjects[i].title) : createNotSelectedFolder(parsedProjects[i].title)
     }
-    if (!loadTasks()){
-        appendPlaceHolder()
+    if(parsedProjects.length == 0){
+        createNoProjectAlert()
+    }
+    else{
+        if (!loadTasks()){
+            appendPlaceHolder()
+        }
     }
 }
 
