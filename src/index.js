@@ -1,10 +1,10 @@
 import {addMenuEvent} from "./burgerMenu"
-import {updateFolders} from "./Projectfolders"
 import {callAddProjectListner} from "./projectTextfield"
-import {getStorageItems} from "./localStorage"
-//burger icon//
+import {getLocalStorageProject} from "./storage"
+import {addTaskButtonListner} from "./popUpTaskForm"
+import {clearCompleted} from "./taskSection"
 addMenuEvent()
-getStorageItems()
-//hover and click project//
-updateFolders()
 callAddProjectListner()
+getLocalStorageProject()
+addTaskButtonListner()
+clearCompleted()
